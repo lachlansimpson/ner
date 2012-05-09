@@ -1,0 +1,76 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Person detail page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+Person detail
+{% endblock %}
+
+{% block content %}
+    <section>
+    <h3>Main details</h3>
+    Name: {{ person }} <br />
+    Date of Birth: {{ person.dob }} <br />
+    Gender: {{ person.get_gender_display }} <br />
+    {% if person.religion %}
+    Religion: {{ person.religion }} <br />
+    {% endif %}
+    {% if person.marital_status %}
+    Marital status: {{ person.get_marital_status_display }} <br />
+    {% endif %}    
+    {% if person.number_of_dependants %}
+    Number of dependants: {{ person.number_of_dependants }} <br />
+    {% endif %}
+    Address: {{ person.current_address }}
+
+    {% if person.phone_mobile or person.email or person.phone_home or person.phone_other %}
+        <h3>Contact Details</h3>
+        {% if person.phone_mobile %}
+        Mobile: {{ person.phone_mobile }} <br />
+        {% endif %}
+        {% if person.email %}
+        Email: {{ person.email }} <br />
+        {% endif %}
+        {% if person.phone_home %}
+        Home Phone: {{ person.phone_home }} <br />
+        {% endif %}
+        {% if person.phone_other %}
+        Other Phone: {{ person.phone_other }} <br />
+        {% endif %}
+    {% endif %}
+
+    {% if person.home_island or person.birth_place or person.island_represented %}
+        <h3>Islands</h3>
+        {% if person.home_island %}
+        Home Island: {{ person.get_home_island_display }} <br />
+        {% endif %}
+        {% if person.birth_place %}
+        Birth Place: {{ person.get_birth_place_display }} <br />
+        {% endif %}
+        {% if person.island_represented %}
+        Island Represented: {{ person.get_island_represented_display }} <br />
+        {% endif %}
+    {% endif %}
+
+
+    {% if person.passport_no or person.discharge_book or person.medical_test_data %}
+        <h3>Other Information</h3> 
+        {% if person.passport_no %}
+        Passport Number: {{ person.passport_no }} <br />
+        {% endif %}
+        {% if person.discharge_book %}
+        Discharge Book: {{ person.discharge_book }} <br />
+        {% endif %}
+        {% if person.medical_test_date %}
+        Last Medical Test on {{ person.medical_test_date }} <br />
+        {% endif %}
+    {% endif %} 
+    </section>
+    
+    <section>
+    <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
+    </section>
+{% endblock %}

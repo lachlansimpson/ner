@@ -1,0 +1,29 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Organisation list page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+Organisation list
+{% endblock %}
+
+{% block content %}
+{% if organisation_list %}
+
+{% regroup organisation_list|dictsort:"industry" by get_industry_display as industry_list %}
+    <ul>
+    {% for industry in industry_list %}
+        <li>{{ industry.grouper }}
+        <ul>
+            {% for org in industry.list %} 
+                <li><a href="/ner/organisation/{{ org.id }}/">{{ org.name }}</a></li>
+            {% endfor %}
+        </ul>
+        </li>
+        {% endfor %}
+{% else %}
+    <p>No Organisations are available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+Software developed and written by Lachlan 'Musicman' Simpson (c)2012
+
+Notes:
+Django Notes - a good example of how to use the views to call the correct form
+http://komunitasweb.com/2010/02/django-tutorial-simple-notes-application/
+
+For search, Haystack - django plugin
+http://haystacksearch.org/
+
+South is installed:
+
+Once a change has been made to app/models.py do this from within a virtualised
+environment (otherwise django throws an error, as it uses the wrong django):
+$ python manage.py schemamigration app --auto
+then
+$ python manage.py migrate app
+

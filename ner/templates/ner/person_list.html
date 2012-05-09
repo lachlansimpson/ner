@@ -1,0 +1,22 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Person list page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+List of people available
+{% endblock %}
+
+{% block content %}
+{% if person_list %}
+    <ul>
+    {% for person in person_list %}
+        <li><a href="/ner/person/{{ person.id }}/">{{ person }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No people are available.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Vacancy detail page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+Vacancy details
+{% endblock %}
+
+{% block content %}
+    <section>
+
+    <p>Job Title: {{ vacancy.title }}</p>
+    <p>Organisation: {{ vacancy.organisation }}</p>
+    {% if vacancy.division %}
+    <p>Division: {{ vacancy.division }}</p>   
+    {% endif %}
+    <p>Closing Date: {{ vacancy.closing_date }}</p>
+
+    <p>Salary Levels: 
+    {{ vacancy.salary_level_1 }} - {{ vacancy.salary_level_2 }}|
+    {{ vacancy.salary_level_3 }} - {{ vacancy.salary_level_4 }}
+    <br />
+
+    <p>Requirements</p>
+    {% for requirement in vacancy.requirements.all %}
+        <li>{{ requirement }}</li>
+    {% endfor %}
+    </section>
+{% endblock %}

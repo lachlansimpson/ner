@@ -1,0 +1,140 @@
+Several models have choices available to them that will be fixed in the 
+database. They are reproduced here. The choice groups are: 
+
+Yes/No: used for simple questions
+
+Gender: Male/Female
+
+Marital Status: Single/Married
+
+Islands: used for an Individuals home island, birth place, representiative 
+island, and the location of an organisation
+
+Organisational Types: An organisation can be one of Government, Private, 
+Overseas, Agency, Educational, or Not Applicable
+
+Salary levels: each vacancy is advertised with up to 4 salary levels - two below
+the bar and two over the bar. The salary levels are the 2-20 as listed in the 
+MFED Government Salary Scale effective 1st January 2010. Note that no value is
+put into this field - it just represents the level. For the amount that each 
+level receives, please see the Salary Scale.
+
+ISCO Codes: each job has an occupation code, this is the top level of the ISCO 
+v4
+
+ISIC Codes: each organisation has an Industry code, this is the top level of 
+ISIC 2008
+
+The values in each choice are here:
+
+ISLAND_CHOICES = (
+    ('01',u'Tarawa'),
+    ('02',u'Kiritimati'),
+    ('03',u'Makin'),
+    ('04',u'Butaritari'),
+    ('05',u'Marakei'),
+    ('06',u'Maiana'),
+    ('07',u'Kuria'),
+    ('08',u'Aranuka'),
+    ('09',u'Abemana'),
+    ('10',u'Nonuti'),
+    ('11',u'Tabiteua'),
+    ('12',u'Onotoa'),
+    ('13',u'Beru'),
+    ('14',u'Nikunau'),
+    ('15',u'Tamana'),
+    ('16',u'Arorae'),
+    ('17',u'Banaba'),
+    ('18',u'Teraina'),
+    ('19',u'Kanton'),
+    ('20',u'Tabuaeran'),
+    ('21',u'Other'),
+    ('22',u'N/A'),
+    ('23',u'All Islands'),
+)
+
+YESNO_CHOICES = (
+    (u'Y', u'Yes'),
+    (u'N', u'No'),
+)    
+
+GENDER_CHOICES = (
+    (u'M',u'Male'),
+    (u'F',u'Female'),
+)
+
+MARRIED_CHOICES = (
+    (u'S',u'Single'),
+    (u'M',u'Married'),
+)
+
+ORG_CAT_CHOICES = (
+    ('G',u'Government'),
+    ('P',u'Private'),
+    ('O',u'Overseas'),
+    ('A',u'Agency'),
+    ('E',u'Education'),
+    ('Z',u'Not Applicable'),
+)
+
+SALARY_LEVELS = (
+    ('20',u'Level 20'),
+    ('19',u'Level 19'),
+    ('18',u'Level 18'),
+    ('17',u'Level 17'),
+    ('16',u'Level 16'),
+    ('15',u'Level 15'),
+    ('14',u'Level 14'),
+    ('13',u'Level 13'),
+    ('12',u'Level 12'),
+    ('11',u'Level 11'),
+    ('10',u'Level 10'),
+    ('09',u'Level 9'),
+    ('08',u'Level 8'),
+    ('07',u'Level 7'),
+    ('06',u'Level 6'),
+    ('05',u'Level 5'),
+    ('04',u'Level 4'),
+    ('03',u'Level 3'),
+    ('02',u'Level 2'),
+    ('01',u'Level 1'),
+    ('NA',u'Not Applicable'),
+)
+
+ISIC_CODES = (
+    ('A',u'Agriculture, forestry and fishing'),
+    ('B',u'Mining and quarrying'),
+    ('C',u'Manufacturing'),
+    ('D',u'Electricity, gas, steam and air conditioning supply'),
+    ('E',u'Water supply; sewerage, waste management and remediation activities'),
+    ('F',u'Construction'),
+    ('G',u'Wholesale and retail trade; repair of motor vehicles and motorcycles'),
+    ('H',u'Transportation and storage'),
+    ('I',u'Accommodation and food service activities'),
+    ('J',u'Information and communication'),
+    ('K',u'Financial and insurance activities'),
+    ('L',u'Real estate activities'),
+    ('M',u'Professional, scientific and technical activities'),
+    ('N',u'Administrative and support service activities'),
+    ('O',u'Public administration and defence; compulsory social security'),
+    ('P',u'Education'),
+    ('Q',u'Human health and social work activities'),
+    ('R',u'Arts, entertainment and recreation'),
+    ('S',u'Other service activities'),
+    ('T',u'Activities of households as employers; undifferentiated goods- and services-producing activities of households for own use'),
+    ('U',u'Activities of extraterritorial organizations and bodies'),
+)
+
+ISCO_CODES = (
+    ('0','Armed forces occupations'),
+    ('1','Managers'),
+    ('2','Professionals'),
+    ('3','Technicians and associate professionals'),
+    ('4','Clerical support workers'),
+    ('5','Service and sales workers'),
+    ('6','Skilled agricultural, forestry and fishery workers'),
+    ('7','Craft and related trades workers'),
+    ('8','Plant and machine operators, and assemblers'),
+    ('9','Elementary occupations'),
+)
+

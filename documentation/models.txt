@@ -1,0 +1,53 @@
+Models
+
+These are the models that are available in the system:
+
+Person has the attributes (* indicates required):
+
+first name*, surname*, date of birth*, gender*, marital status, number of 
+dependants, religion, current address*, previous address, home island (choice of
+20 islands, Other, N/A and All), birth place (Island list), island represented 
+(Island list), phone mobile, phone home, phone other, email, passport number, 
+discharge book
+
+The person object's default listing is "full name, id", eg: "Lachlan Simpson, 1"
+
+A person can have the following extras added to their record:
+
+an FTC Qualification with attributes:
+person* (which is the link back to the person), cadet number*, year graduated*. 
+
+a Certificate with attributes:
+person*, institute*, program*, course_content*, duration*
+
+The default listing for a Certificate is "program, institute", eg "Cert2 IT, 
+KIT"
+
+There is an Organisation object with the attributes:
+name*, island (Island list), address, contact name, contact phone 1, contact 
+phone 2, contact email, industry (ISIC Code list), category (Category list)
+
+The default listing for an Organisation is "name, island" or "name", depending 
+on if an island is listed. eg "Moels, Tarawa" or "KIT"
+
+There is a Job object, with the attributes:
+title*, occupation code (ISCO list), organisation* (this is a link back to the 
+organisation object that is offering the job), division (within the 
+Organisation), salary levels 1-4, 
+
+There is a Vacancy object, with the attributes:
+job* (the job object that describes it), closing date, and requirements. There 
+can be as many requirements on each vacancy as is required.
+
+There is a Requirement object, which is only linked to a Vacancy. It is 
+envisaged that a few requirements will be used frequently - eg "police check" 
+and "FTC Qualification" for instance. Requirements have the attributes:
+name*, notes
+
+There is an Experience object with the attributes:
+person* (who is doing/has done the job), start date*, end date*, job* (linked to 
+the job done)
+
+There is a ShipExperience object with the attributes:
+person*, recruiting agency, embark date*, disembark date*, vessel name*, vessel 
+type*, vessel company*.

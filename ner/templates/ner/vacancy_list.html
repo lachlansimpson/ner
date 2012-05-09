@@ -1,0 +1,22 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Vacancy list page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+Vacancy list
+{% endblock %}
+
+{% block content %}
+{% if vacancy_list %}
+    <ul>
+    {% for job in vacancy_list %}
+        <li><a href="/ner/vacancy/{{ job.id }}/">{{ job }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Vacancies are available.</p>
+{% endif %}
+{% endblock %}

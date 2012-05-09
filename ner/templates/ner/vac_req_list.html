@@ -1,0 +1,30 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Requirement list page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+Requirement list
+{% endblock %}
+
+{% block content %}
+{% if requirement_list %}
+    {% regroup requirement_list by req_name as req_list %}
+    <ul>
+        {% for req in req_list %}
+        <li>{{ req.grouper }}</li>
+            <ul>
+            {% for actual_req in req.list %}
+                {% for job in actual_req.vacancy_set.all %}
+                <li><a href="/ner/vacancy/{{ job.id }}/">{{ job }}</a></li>
+                {% endfor %}
+            {% endfor %}
+            </ul>    
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No Vacancies are available.</p>
+{% endif %}
+{% endblock %}

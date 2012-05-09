@@ -1,0 +1,29 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+Main page of the portal.
+{% endcomment %}
+
+{% block title %}
+National Employment Register
+{% endblock %}
+
+{% block content %}
+    <section>
+    <h2>Welcome, {{ user.first_name }}</h2>
+    <h3>General Lists</h3>
+    <p><a href="/ner/people/">List all People</a></p>
+    <p><a href="/ner/orgs/islands/">List all Organisations by island</a></p>
+    <p><a href="/ner/orgs/isic/">List all Organisations by ISIC code</a></p>
+    <p><a href="/ner/orgs/category/">List all Organisations by Category</a></p>
+    <p><a href="/ner/vacancies/">List all Job vacancies</a></p>
+    <p><a href="/ner/vacancies/requirements">List all Job vacancies by requirement</a></p>
+
+    </section>
+    
+    <section>
+    <h3>Add a new...</h3>
+    <p><a href="/admin/ner/person/add">Create a new Person</a></p>
+    <p><a href="/admin/ner/organisation/add">Create a new Organisation</a></p>
+    <p><a href="/admin/ner/vacancy/add">Create a new Job vacancy</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+Organisation detail of the portal.
+{% endcomment %}
+{% block title %}
+Organisation detail
+{% endblock %}
+
+{% block content %}
+    <section>
+    
+    <p>Name: {{ organisation.name }}</p>
+    {% if organisation.island %}<p>
+        Island: {{ organisation.get_island_display }}
+    </p> {% endif %}
+    <p>Address: {{ organisation.address }}</p>
+    {% if organisation.contact_name %}<p>
+    Contact Person: {{ organisation.contact_name }}
+    </p> {% endif %}
+    {% if organisation.phone_1 %}<p>
+    Phone 1: {{  organisation.phone_1 }}
+    </p> {% endif %}
+    {% if organisation.phone_2 %}<p>
+    Phone 2: {{  organisation.phone_2 }}
+    </p> {% endif %}
+    {% if organisation.email %}<p>
+    Email: {{ organisation.email }}
+    </p> {% endif %}
+    {% if organisation.industry %}<p>
+    Industry (ISIC) Code: {{ organisation.get_industry_display }}
+    </p> {% endif %}
+    {% if organisation.category %}<p>
+    Industry Category: {{ organisation.get_category_display }}
+    </p> {% endif %}
+    
+    </section>
+{% endblock %}
+
+
+
