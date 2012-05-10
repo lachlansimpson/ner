@@ -1,11 +1,12 @@
+National Employment Register database for the 
+Ministry of Labour and Human Resource Development
+Bairiki, Kiribati
+
+written using Django 1.4
+
 Software developed and written by Lachlan 'Musicman' Simpson (c)2012
 
-Notes:
-Django Notes - a good example of how to use the views to call the correct form
-http://komunitasweb.com/2010/02/django-tutorial-simple-notes-application/
-
-For search, Haystack - django plugin
-http://haystacksearch.org/
+Released under the GPL 3
 
 South is installed:
 
@@ -14,4 +15,3 @@ environment (otherwise django throws an error, as it uses the wrong django):
 $ python manage.py schemamigration app --auto
 then
 $ python manage.py migrate app
-
