@@ -128,6 +128,21 @@ ISCO_CODES = (
     ('9','Elementary occupations'),
 )
 
+class Requirement(models.Model):
+    class Meta:
+        verbose_name = "Job Requirement"
+        verbose_name_plural = "Job Requirements"
+
+    req_name = models.CharField("Requirement title",max_length=25)
+    req_notes = models.CharField("Requirement note",max_length=100,
+                                 blank='True')
+    def __unicode__(self):
+        """ Requirement reference"""
+        if self.req_notes:
+            return self.req_name + ', ' + self.req_notes
+        else:
+            return self.req_name
+
 class Person(models.Model):
     class Meta: 
         verbose_name_plural = "People"
@@ -164,6 +179,8 @@ class Person(models.Model):
 
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
+    skills = models.ManyToManyField(Requirement)
+
     def __unicode__(self):
         """Person reference: full name and ID # """
         """ return self.first_name + ' ' + self.surname + ', ' + self.pk """
@@ -206,21 +223,6 @@ class Organisation(models.Model):
             return self.name + ', ' + self.get_island_display()
         else:
             return self.name + ', all islands'
-
-class Requirement(models.Model):
-    class Meta:
-        verbose_name = "Job Requirement"
-        verbose_name_plural = "Job Requirements"
-
-    req_name = models.CharField("Requirement title",max_length=25)
-    req_notes = models.CharField("Requirement note",max_length=100,
-                                 blank='True')
-    def __unicode__(self):
-        """ Requirement reference"""
-        if self.req_notes:
-            return self.req_name + ', ' + self.req_notes
-        else:
-            return self.req_name
 
 class Vacancy(models.Model):
     class Meta:

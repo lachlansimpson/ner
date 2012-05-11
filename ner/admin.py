@@ -57,6 +57,7 @@ class PersonAdminForm(ModelForm):
         }
 
 class PersonAdmin(admin.ModelAdmin):
+    filter_horizontal = ("skills",)
     fieldsets = [
         ('Biographical', {'fields':[('first_name', 'surname'), 
                                     ('dob', 'gender')]}),
@@ -73,6 +74,7 @@ class PersonAdmin(admin.ModelAdmin):
                                          ('passport_no', 'discharge_book'),
                                          'medical_test_date'],
                                          'classes':['collapse']}),
+        ('Skills', {'fields':['skills'],'classes':['collapse']}),
     ]
     inlines = [CertInline, ExperienceInline, ShipXPInline, FTCQualInline]
     list_filter = ('gender',)

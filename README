@@ -2,11 +2,11 @@ National Employment Register database for the
 Ministry of Labour and Human Resource Development
 Bairiki, Kiribati
 
-written using Django 1.4
-
 Software developed and written by Lachlan 'Musicman' Simpson (c)2012
 
 Released under the GPL 3
+
+Written using Django 1.4
 
 South is installed:
 

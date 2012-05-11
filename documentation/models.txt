@@ -8,7 +8,7 @@ first name*, surname*, date of birth*, gender*, marital status, number of
 dependants, religion, current address*, previous address, home island (choice of
 20 islands, Other, N/A and All), birth place (Island list), island represented 
 (Island list), phone mobile, phone home, phone other, email, passport number, 
-discharge book
+discharge book, skills (many to many to the Requirements list)
 
 The person object's default listing is "full name, id", eg: "Lachlan Simpson, 1"
 
@@ -30,13 +30,9 @@ phone 2, contact email, industry (ISIC Code list), category (Category list)
 The default listing for an Organisation is "name, island" or "name", depending 
 on if an island is listed. eg "Moels, Tarawa" or "KIT"
 
-There is a Job object, with the attributes:
-title*, occupation code (ISCO list), organisation* (this is a link back to the 
-organisation object that is offering the job), division (within the 
-Organisation), salary levels 1-4, 
-
 There is a Vacancy object, with the attributes:
-job* (the job object that describes it), closing date, and requirements. There 
+Job title, job occupation code, 4 job salary levels, organisation offering the
+job, division within that organisation, closing date, and requirements. There 
 can be as many requirements on each vacancy as is required.
 
 There is a Requirement object, which is only linked to a Vacancy. It is 
@@ -45,8 +41,8 @@ and "FTC Qualification" for instance. Requirements have the attributes:
 name*, notes
 
 There is an Experience object with the attributes:
-person* (who is doing/has done the job), start date*, end date*, job* (linked to 
-the job done)
+person* (who is doing/has done the job), start date*, end date*, job title,
+organisation, reference name, reference contact email, reference contact phone
 
 There is a ShipExperience object with the attributes:
 person*, recruiting agency, embark date*, disembark date*, vessel name*, vessel 
