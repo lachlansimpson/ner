@@ -92,7 +92,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     ]
 
 class VacancyAdmin(admin.ModelAdmin):
-    filter_horizontal = ("requirements",)
+    filter_horizontal = ("requirements","certificates")
     fieldsets = [
         ('Basic Details',
          {'fields':[('title','closing_date'),'organisation','division'],
@@ -101,11 +101,11 @@ class VacancyAdmin(admin.ModelAdmin):
          {'fields':[('salary_level_1','salary_level_2'),('salary_level_3','salary_level_4')],
           'classes':['collapse']}),
         ('Requirements',
-         {'fields':['requirements'],
+         {'fields':['certificates','requirements'],
           'classes':['collapse']}),
     ]
     list_filter = ('closing_date',)
-
+    
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Vacancy, VacancyAdmin)

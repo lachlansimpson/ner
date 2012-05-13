@@ -247,6 +247,8 @@ class Vacancy(models.Model):
 
     closing_date = models.DateField()
     requirements = models.ManyToManyField(Requirement)
+    certificates = models.ManyToManyField(Certificate, blank='True',
+                                          null='True')
 
     def __unicode__(self):
         """ Vacancy reference """
