@@ -7,7 +7,6 @@ Has classes for:
     Certificate : for an individuals schooling history
     FTCQualification: for an individuals FTC history
     Organisation: for Organisations
-    Jobs: for jobs
 
 There are choices defined for: Islands, yes/no, gender(M/F), marital status
 (S/M), Industry codes via ILO (ISIC), Occupation codes via ILO (ISOC), and
@@ -247,8 +246,13 @@ class Vacancy(models.Model):
 
     closing_date = models.DateField()
     requirements = models.ManyToManyField(Requirement)
-    certificates = models.ManyToManyField(Certificate, blank='True',
-                                          null='True')
+    '''
+    TODO: I've just realised that adding Certificates to VAcancy wont work as 
+    each Certificate is ManyToMany to a person. People and Certificates may 
+    need to be de-coupled, depending on clients needs.
+    '''
+    #certificates = models.ManyToManyField(Certificate, blank='True',
+    #                                     null='True')
 
     def __unicode__(self):
         """ Vacancy reference """

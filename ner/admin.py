@@ -1,7 +1,7 @@
 """
 makes the objects available via the admin interface
 """
-from ner.models import Person, Organisation, Experience, FTCQualification, Certificate, Vacancy, Requirement, ShipExperience
+from ner.models import * 
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.contrib import admin
 from django.forms import ModelForm, ValidationError
@@ -92,7 +92,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     ]
 
 class VacancyAdmin(admin.ModelAdmin):
-    filter_horizontal = ("requirements","certificates")
+    filter_horizontal = ("requirements",)
     fieldsets = [
         ('Basic Details',
          {'fields':[('title','closing_date'),'organisation','division'],
@@ -101,7 +101,7 @@ class VacancyAdmin(admin.ModelAdmin):
          {'fields':[('salary_level_1','salary_level_2'),('salary_level_3','salary_level_4')],
           'classes':['collapse']}),
         ('Requirements',
-         {'fields':['certificates','requirements'],
+         {'fields':['requirements'],
           'classes':['collapse']}),
     ]
     list_filter = ('closing_date',)
