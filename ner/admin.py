@@ -91,7 +91,7 @@ class OrganisationAdmin(admin.ModelAdmin):
         ('Contact details',
          {'fields':[('contact_name','contact_email'),('contact_phone_1','contact_phone_2')],
           'classes':['collapse']}),
-        ('extra', {'fields':[('category','industry')], 'classes':['collapse']}), 
+        ('extra', {'fields':[('category','industry'), 'slug'], 'classes':['collapse']}), 
     ]
 
 class VacancyAdmin(admin.ModelAdmin):

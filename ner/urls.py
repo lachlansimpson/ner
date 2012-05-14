@@ -41,6 +41,11 @@ urlpatterns = patterns('ner.views',
                 queryset=Organisation.objects.all(),
                 template_name="ner/org_cat_list.html")),
         
+        url(r'^organisation/(?P<slug>[-\w]+)/$',
+            DetailView.as_view(
+                model=Organisation,
+                template_name='ner/organisation_detail.html')),
+
         url(r'^organisation/(?P<pk>\d+)/$',
             DetailView.as_view(
                 model=Organisation)),
