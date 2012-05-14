@@ -200,7 +200,7 @@ class Certificate(models.Model):
     program = models.CharField(max_length=100)
     course_content = models.CharField(max_length=200, blank='True', null='True')
     year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
-    duration = models.CharField(max_length=10)
+    duration = models.CharField(max_length=10,blank='True',null='True')
     
 
     def __unicode__(self):
