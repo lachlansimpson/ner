@@ -178,7 +178,7 @@ class Person(models.Model):
 
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
-    skills = models.ManyToManyField(Requirement)
+    skills = models.ManyToManyField(Requirement, blank='True', null='True')
 
     def __unicode__(self):
         """Person reference: full name and ID # """
@@ -198,8 +198,10 @@ class Certificate(models.Model):
     person = models.ForeignKey('Person', blank='True', null='True')
     institute = models.CharField(max_length=40)
     program = models.CharField(max_length=100)
-    course_content = models.CharField(max_length=200)
+    course_content = models.CharField(max_length=200, blank='True', null='True')
+    year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
     duration = models.CharField(max_length=10)
+    
 
     def __unicode__(self):
         """Certificate reference - program name and institution"""
@@ -212,7 +214,7 @@ class Organisation(models.Model):
     contact_name = models.CharField(max_length=40,blank='True')
     contact_phone_1 = models.CharField('Phone 1', max_length=9,blank='True')
     contact_phone_2 = models.CharField('Phone 2', max_length=9,blank='True')
-    contact_email = models.EmailField('Email')
+    contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
 
