@@ -217,6 +217,7 @@ class Organisation(models.Model):
     contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
+    slug = models.SlugField(max_length=40)
 
     def __unicode__(self):
         """ Organisational reference"""

@@ -85,6 +85,7 @@ class PersonAdmin(admin.ModelAdmin):
     form = PersonAdminForm
 
 class OrganisationAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
     fieldsets = [
         ('', {'fields':[('name', 'island'), 'address']}),
         ('Contact details',
