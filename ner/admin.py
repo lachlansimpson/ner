@@ -9,6 +9,10 @@ from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
 from django.forms.extras.widgets import SelectDateWidget 
 import datetime
 
+this_year = datetime.date.today().year
+BIRTH_YEARS = range(this_year-51, this_year-16)
+XP_YEARS = range(this_year-20,this_year+1)
+
 class CertInline(admin.TabularInline):
     model = Certificate
     template = 'admin/collapsed_tabular_inline.html'
@@ -22,8 +26,8 @@ class XPAdminForm(ModelForm):
     class Meta:
         model = Experience
         widgets = {
-            'start_date': SelectDateWidget(),
-            'end_date': SelectDateWidget(),
+            'start_date': SelectDateWidget(years=XP_YEARS),
+            'end_date': SelectDateWidget(years=XP_YEARS),
         }
     
     def clean(self):
@@ -48,10 +52,8 @@ class ShipXPInline(admin.TabularInline):
 class PersonAdminForm(ModelForm):
     class Meta:
         model = Person 
-        this_year = datetime.date.today().year
-        YEARS_LIST = range(this_year-51, this_year-16)
         widgets = {
-            'dob': SelectDateWidget(years=YEARS_LIST),
+            'dob': SelectDateWidget(years=BIRTH_YEARS),
             'gender': RadioSelect(),
             'medical_test_date': SelectDateWidget(),
         }
