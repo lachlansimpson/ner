@@ -17,28 +17,28 @@ Salary levels
 from django.db import models
 
 ISLAND_CHOICES = (
-    ('01',u'Tarawa'),
-    ('02',u'Kiritimati'),
-    ('03',u'Makin'),
-    ('04',u'Butaritari'),
-    ('05',u'Marakei'),
-    ('06',u'Maiana'),
-    ('07',u'Kuria'),
-    ('08',u'Aranuka'),
-    ('09',u'Abemana'),
-    ('10',u'Nonuti'),
-    ('11',u'Tabiteua'),
-    ('12',u'Onotoa'),
-    ('13',u'Beru'),
-    ('14',u'Nikunau'),
-    ('15',u'Tamana'),
-    ('16',u'Arorae'),
-    ('17',u'Banaba'),
-    ('18',u'Teraina'),
-    ('19',u'Kanton'),
-    ('20',u'Tabuaeran'),
-    ('21',u'Other'),
-    ('22',u'N/A'),
+    ('01',u'N/A'), 
+    ('02',u'Tarawa'),
+    ('03',u'Kiritimati'),
+    ('04',u'Makin'),
+    ('05',u'Butaritari'),
+    ('06',u'Marakei'),
+    ('07',u'Maiana'),
+    ('08',u'Kuria'),
+    ('09',u'Aranuka'),
+    ('10',u'Abemana'),
+    ('11',u'Nonuti'),
+    ('12',u'Tabiteua'),
+    ('13',u'Onotoa'),
+    ('14',u'Beru'),
+    ('15',u'Nikunau'),
+    ('16',u'Tamana'),
+    ('17',u'Arorae'),
+    ('18',u'Banaba'),
+    ('19',u'Teraina'),
+    ('20',u'Kanton'),
+    ('21',u'Tabuaeran'),
+    ('22',u'Other'),
     ('23',u'All Islands'),
 )
 
@@ -163,7 +163,7 @@ class Person(models.Model):
                                    default='01', blank='True')
 
     birth_place = models.CharField(max_length=2,choices=ISLAND_CHOICES,
-                                   default='01', blank='True')
+                                   default='02', blank='True')
 
     island_represented = models.CharField(max_length=2, choices=ISLAND_CHOICES,
                                           default='01', blank='True')
