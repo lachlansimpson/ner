@@ -720,6 +720,16 @@ table#change-history tbody th {
     margin: 10px 15px;
 }
 
+#content-left {
+    width: 50%;
+    float: left;
+}
+
+#content-right {
+    width: 50%;
+    float: right;
+}
+
 #header {
     width: 100%;
 }
