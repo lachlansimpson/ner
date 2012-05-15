@@ -13,6 +13,9 @@ this_year = datetime.date.today().year
 BIRTH_YEARS = range(this_year-51, this_year-16)
 XP_YEARS = range(this_year-20,this_year+1)
 
+class ApplicantsInline(admin.StackedInline):
+    model = Vacancy.applicants.through
+
 class CertInline(admin.TabularInline):
     model = Certificate
     template = 'admin/collapsed_tabular_inline.html'
@@ -78,7 +81,7 @@ class PersonAdmin(admin.ModelAdmin):
                                          'classes':['collapse']}),
         ('Skills', {'fields':['skills'],'classes':['collapse']}),
     ]
-    inlines = [CertInline, ExperienceInline, ShipXPInline, FTCQualInline]
+    inlines = [CertInline, ExperienceInline, ShipXPInline, FTCQualInline, ApplicantsInline]
     list_filter = ('gender',)
     list_display = ('first_name','surname','birth_place',)
     search_fields = ('first_name',)#'surname','dob','email',)
@@ -105,6 +108,9 @@ class VacancyAdmin(admin.ModelAdmin):
           'classes':['collapse']}),
         ('Requirements',
          {'fields':['requirements'],
+          'classes':['collapse']}),
+        ('Applicants',
+         {'fields':['applicants'],
           'classes':['collapse']}),
     ]
     list_filter = ('closing_date',)

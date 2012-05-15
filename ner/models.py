@@ -250,12 +250,13 @@ class Vacancy(models.Model):
     closing_date = models.DateField()
     requirements = models.ManyToManyField(Requirement)
     '''
-    TODO: I've just realised that adding Certificates to VAcancy wont work as 
+    TODO: I've just realised that adding Certificates to Vacancy wont work as 
     each Certificate is ManyToMany to a person. People and Certificates may 
     need to be de-coupled, depending on clients needs.
     '''
     #certificates = models.ManyToManyField(Certificate, blank='True',
     #                                     null='True')
+    applicants = models.ManyToManyField(Person, blank='True', null='True')
 
     def __unicode__(self):
         """ Vacancy reference """
