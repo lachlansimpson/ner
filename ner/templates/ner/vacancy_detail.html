@@ -12,19 +12,19 @@ Vacancy details
 {% block content %}
     <section>
 
-    <p>Job Title: {{ vacancy.title }}</p>
-    <p>Organisation: {{ vacancy.organisation }}</p>
+    <p><h4>Job Title:</h4> {{ vacancy.title }}</p>
+    <p><h4>Organisation:</h4> <a href="/ner/organisation/{{ vacancy.organisation.slug}}/">{{ vacancy.organisation }}</a></p>
     {% if vacancy.division %}
-    <p>Division: {{ vacancy.division }}</p>   
+    <p><h4>Division:</h4> {{ vacancy.division }}</p>   
     {% endif %}
-    <p>Closing Date: {{ vacancy.closing_date }}</p>
+    <p><h4>Closing Date:</h4> {{ vacancy.closing_date }}</p>
 
-    <p>Salary Levels: 
+    <p><h4>Salary Levels:</h4> 
     {{ vacancy.salary_level_1 }} - {{ vacancy.salary_level_2 }}|
     {{ vacancy.salary_level_3 }} - {{ vacancy.salary_level_4 }}
     <br />
 
-    <p>Requirements</p>
+    <p><h4>Requirements</h4></p>
     {% for requirement in vacancy.requirements.all %}
         <li>{{ requirement }}</li>
     {% endfor %}

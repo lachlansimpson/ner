@@ -9,28 +9,28 @@ Organisation detail
 {% block content %}
     <section>
     
-    <p>Name: {{ organisation.name }}</p>
-    {% if organisation.island %}<p>
-        Island: {{ organisation.get_island_display }}
+    <p><h4>Name:</h4> {{ organisation.name }}</p>
+    {% if organisation.island %}<p><h4>
+        Island:</h4> {{ organisation.get_island_display }}
     </p> {% endif %}
-    <p>Address: {{ organisation.address }}</p>
-    {% if organisation.contact_name %}<p>
-    Contact Person: {{ organisation.contact_name }}
+    <p><h4>Address:</h4> {{ organisation.address }}</p>
+    {% if organisation.contact_name %}<p><h4>
+    Contact Person:</h4> {{ organisation.contact_name }}
     </p> {% endif %}
-    {% if organisation.phone_1 %}<p>
-    Phone 1: {{  organisation.phone_1 }}
+    {% if organisation.phone_1 %}<p><h4>
+    Phone 1:</h4> {{  organisation.phone_1 }}
     </p> {% endif %}
-    {% if organisation.phone_2 %}<p>
-    Phone 2: {{  organisation.phone_2 }}
+    {% if organisation.phone_2 %}<p><h4>
+    Phone 2:</h4> {{  organisation.phone_2 }}
     </p> {% endif %}
-    {% if organisation.email %}<p>
-    Email: {{ organisation.email }}
+    {% if organisation.email %}<p><h4>
+    Email:</h4> {{ organisation.email }}
     </p> {% endif %}
-    {% if organisation.industry %}<p>
-    Industry (ISIC) Code: {{ organisation.get_industry_display }}
+    {% if organisation.industry %}<p><h4>
+    Industry (ISIC) Code:</h4> {{ organisation.get_industry_display }}
     </p> {% endif %}
-    {% if organisation.category %}<p>
-    Industry Category: {{ organisation.get_category_display }}
+    {% if organisation.category %}<p><h4>
+    Industry Category:</h4> {{ organisation.get_category_display }}
     </p> {% endif %}
     
     </section>

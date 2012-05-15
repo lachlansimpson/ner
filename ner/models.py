@@ -17,28 +17,28 @@ Salary levels
 from django.db import models
 
 ISLAND_CHOICES = (
-    ('01',u'Tarawa'),
-    ('02',u'Kiritimati'),
-    ('03',u'Makin'),
-    ('04',u'Butaritari'),
-    ('05',u'Marakei'),
-    ('06',u'Maiana'),
-    ('07',u'Kuria'),
-    ('08',u'Aranuka'),
-    ('09',u'Abemana'),
-    ('10',u'Nonuti'),
-    ('11',u'Tabiteua'),
-    ('12',u'Onotoa'),
-    ('13',u'Beru'),
-    ('14',u'Nikunau'),
-    ('15',u'Tamana'),
-    ('16',u'Arorae'),
-    ('17',u'Banaba'),
-    ('18',u'Teraina'),
-    ('19',u'Kanton'),
-    ('20',u'Tabuaeran'),
-    ('21',u'Other'),
-    ('22',u'N/A'),
+    ('01',u'N/A'), 
+    ('02',u'Tarawa'),
+    ('03',u'Kiritimati'),
+    ('04',u'Makin'),
+    ('05',u'Butaritari'),
+    ('06',u'Marakei'),
+    ('07',u'Maiana'),
+    ('08',u'Kuria'),
+    ('09',u'Aranuka'),
+    ('10',u'Abemana'),
+    ('11',u'Nonuti'),
+    ('12',u'Tabiteua'),
+    ('13',u'Onotoa'),
+    ('14',u'Beru'),
+    ('15',u'Nikunau'),
+    ('16',u'Tamana'),
+    ('17',u'Arorae'),
+    ('18',u'Banaba'),
+    ('19',u'Teraina'),
+    ('20',u'Kanton'),
+    ('21',u'Tabuaeran'),
+    ('22',u'Other'),
     ('23',u'All Islands'),
 )
 
@@ -163,7 +163,7 @@ class Person(models.Model):
                                    default='01', blank='True')
 
     birth_place = models.CharField(max_length=2,choices=ISLAND_CHOICES,
-                                   default='01', blank='True')
+                                   default='02', blank='True')
 
     island_represented = models.CharField(max_length=2, choices=ISLAND_CHOICES,
                                           default='01', blank='True')
@@ -178,7 +178,7 @@ class Person(models.Model):
 
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
-    skills = models.ManyToManyField(Requirement)
+    skills = models.ManyToManyField(Requirement, blank='True', null='True')
 
     def __unicode__(self):
         """Person reference: full name and ID # """
@@ -196,10 +196,12 @@ class FTCQualification(models.Model):
 
 class Certificate(models.Model):
     person = models.ForeignKey('Person', blank='True', null='True')
-    institute = models.CharField(max_length=12)
+    institute = models.CharField(max_length=40)
     program = models.CharField(max_length=100)
-    course_content = models.CharField(max_length=200)
-    duration = models.CharField(max_length=10)
+    course_content = models.CharField(max_length=200, blank='True', null='True')
+    year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
+    duration = models.CharField(max_length=10,blank='True',null='True')
+    
 
     def __unicode__(self):
         """Certificate reference - program name and institution"""
@@ -212,9 +214,10 @@ class Organisation(models.Model):
     contact_name = models.CharField(max_length=40,blank='True')
     contact_phone_1 = models.CharField('Phone 1', max_length=9,blank='True')
     contact_phone_2 = models.CharField('Phone 2', max_length=9,blank='True')
-    contact_email = models.EmailField('Email')
+    contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
+    slug = models.SlugField(max_length=40)
 
     def __unicode__(self):
         """ Organisational reference"""
