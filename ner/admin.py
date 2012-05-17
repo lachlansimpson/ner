@@ -15,6 +15,8 @@ XP_YEARS = range(this_year-20,this_year+1)
 
 class ApplicantsInline(admin.StackedInline):
     model = Vacancy.applicants.through
+    verbose_name='Has applied for'
+    verbose_name_plural='Jobs Applied For'
 
 class CertInline(admin.TabularInline):
     model = Certificate

@@ -201,7 +201,6 @@ class Certificate(models.Model):
     course_content = models.CharField(max_length=200, blank='True', null='True')
     year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
     duration = models.CharField(max_length=10,blank='True',null='True')
-    
 
     def __unicode__(self):
         """Certificate reference - program name and institution"""
@@ -256,7 +255,8 @@ class Vacancy(models.Model):
     '''
     #certificates = models.ManyToManyField(Certificate, blank='True',
     #                                     null='True')
-    applicants = models.ManyToManyField(Person, blank='True', null='True')
+    applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='doodaa', 
+                                        blank='True', null='True')
 
     def __unicode__(self):
         """ Vacancy reference """
@@ -295,3 +295,20 @@ class ShipExperience(models.Model):
         """Ship Experience Reference - to and from dates, and the ship name"""
         dates = str(self.embark_date) + ' - ' + str(self.disembark_date) + ', '
         return dates + self.vessel_name
+
+'''
+An intermediate model seemed like a good idea initially, but it might be worth
+just working through a m2m relationship - since there isn't a lot of extra data
+to assemble. Will need to think on this.
+
+Note that this will also require an addition to either Vacancy or Person
+(probably Vacancy though) to complete the transition. See docs for more:
+eg: class Vacancy(models.Model):
+        ...
+        applications = ManyToManyField(Person, through='Application')
+
+class Application(models.Model):
+    person = models.ForeignKey(Person)
+    vacancy = models.ForeignKey(Vacancy)
+    date_applied = models.DateField()
+'''
