@@ -42,7 +42,8 @@ class XPAdminForm(ModelForm):
 
         if end < start:
              raise ValidationError("Experience end date is before it's start date")
-
+        elif end == start:
+             raise ValidationError("Experience end date is the same day as it's start date")
         return cleaned_data
 
 class ExperienceInline(admin.TabularInline):
@@ -99,6 +100,30 @@ class OrganisationAdmin(admin.ModelAdmin):
         ('extra', {'fields':[('category','industry'), 'slug'], 'classes':['collapse']}), 
     ]
 
+class VacancyAdminForm(ModelForm):
+    class Meta:
+        model = Vacancy
+    
+    def clean(self):
+        cleaned_data = super(VacancyAdminForm, self).clean()
+        salary_1 = cleaned_data.get('salary_level_1')
+        salary_2 = cleaned_data.get('salary_level_2')
+        salary_3 = cleaned_data.get('salary_level_3')
+        salary_4 = cleaned_data.get('salary_level_4')
+
+        '''
+        The salary ranges go from high (salary_1) to low (salary_4)
+        If there are any NA, they need to start at salary_4 and work back to
+        salary_1 
+        A vacancy must have at least one salary level
+        '''
+        if not ((salary_1 > salary_2 > salary_3 > salary_4) or
+            (salary_1 > salary_2 > salary_3 and salary_4 == 'NA') or
+            (salary_1 > salary_2 and salary_3 == salary_4 == 'NA') or
+            (salary_1 != 'NA' and salary_2 == salary_3 == salary_4 == 'NA')):
+             raise ValidationError("Salary ranges need to start at a high and progressively go to a lower level. ")
+        return cleaned_data
+
 class VacancyAdmin(admin.ModelAdmin):
     filter_horizontal = ("requirements",)
     fieldsets = [
@@ -116,7 +141,8 @@ class VacancyAdmin(admin.ModelAdmin):
           'classes':['collapse']}),
     ]
     list_filter = ('closing_date',)
-    
+    form = VacancyAdminForm
+
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Vacancy, VacancyAdmin)

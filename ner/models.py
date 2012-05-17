@@ -38,8 +38,9 @@ ISLAND_CHOICES = (
     ('19',u'Teraina'),
     ('20',u'Kanton'),
     ('21',u'Tabuaeran'),
-    ('22',u'Other'),
-    ('23',u'All Islands'),
+    ('22',u'Abaiang'),
+    ('23',u'Other'),
+    ('24',u'All Islands'),
 )
 
 YESNO_CHOICES = (
