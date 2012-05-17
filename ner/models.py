@@ -196,7 +196,7 @@ class FTCQualification(models.Model):
 
 class Certificate(models.Model):
     person = models.ForeignKey('Person', blank='True', null='True')
-    institute = models.CharField(max_length=40)
+    institute = models.CharField(max_length=50)
     program = models.CharField(max_length=100)
     course_content = models.CharField(max_length=200, blank='True', null='True')
     year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
