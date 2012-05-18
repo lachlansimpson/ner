@@ -11,7 +11,7 @@ import datetime
 
 this_year = datetime.date.today().year
 BIRTH_YEARS = range(this_year-51, this_year-16)
-XP_YEARS = range(this_year-20,this_year+1)
+XP_YEARS = range(this_year-25,this_year+1)
 
 class ApplicantsInline(admin.StackedInline):
     model = Vacancy.applicants.through
