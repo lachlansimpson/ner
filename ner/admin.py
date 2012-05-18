@@ -120,7 +120,8 @@ class VacancyAdminForm(ModelForm):
         if not ((salary_1 > salary_2 > salary_3 > salary_4) or
             (salary_1 > salary_2 > salary_3 and salary_4 == 'NA') or
             (salary_1 > salary_2 and salary_3 == salary_4 == 'NA') or
-            (salary_1 != 'NA' and salary_2 == salary_3 == salary_4 == 'NA')):
+            (salary_1 != 'NA' and salary_2 == salary_3 == salary_4 == 'NA') or
+            (salary_1 == salary_2 == salary_3 == salary_4 == 'NA')):
              raise ValidationError("Salary ranges need to start at a high and progressively go to a lower level. ")
         return cleaned_data
 

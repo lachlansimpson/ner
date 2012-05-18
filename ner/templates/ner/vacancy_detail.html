@@ -33,5 +33,10 @@ Vacancy details
     {% for applicant in vacancy.applicants.all %}
     <li><a href="/ner/person/{{ applicant.id}}">{{ applicant }}</a></li>
     {% endfor %}
+
     </section>
+    <section>
+        <p><a href="/admin/ner/vacancy/{{ vacancy.id }}/">Edit this Vacancy</a></p>
+    </section>
+
 {% endblock %}
