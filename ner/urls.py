@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from ner.models import Person, Organisation, Vacancy, Requirement
-from ner.forms import PersonForm, CertInline, ExperienceInline, ShipXPInline, FTCQualInline
+from ner.admin import PersonAdmin, CertInline, ExperienceInline, ShipXPInline, FTCQualInline
 import datetime
 
 urlpatterns = patterns('ner.views',
@@ -17,7 +17,7 @@ urlpatterns = patterns('ner.views',
         url(r'^person/add/$',
             CreateView.as_view(
                 template_name='ner/person_create.html',
-                form_class=PersonForm)),
+                form_class=PersonAdmin)),
 
         url(r'^person/(?P<pk>\d+)/edit/$',
             UpdateView.as_view(
