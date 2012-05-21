@@ -8,9 +8,7 @@ urlpatterns = patterns('ner.views',
         url(r'^$', 'index'),
 
         url(r'^people/$',
-            ListView.as_view(#queryset=Person.objects.filter(dob__gt=latest_retirees_dob))),
-                queryset=Person.objects.filter(dob__gte =
-                                               datetime.datetime((datetime.datetime.today().year-61),1,1)).order_by('surname'))),
+            ListView.as_view(queryset=Person.objects.filter(dob__gte = datetime.datetime((datetime.datetime.today().year-61),1,1)).order_by('surname'))),
 
         url(r'^person/(?P<pk>\d+)/$',
             DetailView.as_view(
@@ -18,7 +16,6 @@ urlpatterns = patterns('ner.views',
 
         url(r'^person/add/$',
             CreateView.as_view(
-                #model=Person)),
                 template_name='ner/person_create.html',
                 form_class=PersonForm)),
 
@@ -63,7 +60,3 @@ urlpatterns = patterns('ner.views',
             DetailView.as_view(
                 model=Vacancy)),
 )
-    
-#urlpatterns += patterns("django.views",
-#       url(r"%s(?P<path>.*)$" % settings.MEDIA_URL[1:], "static.serve", {"document_root": settings.MEDIA_ROOT,})
-#)
