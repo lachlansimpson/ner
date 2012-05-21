@@ -28,5 +28,15 @@ Vacancy details
     {% for requirement in vacancy.requirements.all %}
         <li>{{ requirement }}</li>
     {% endfor %}
+    
+    <p><h4>Applicants</h4></p>
+    {% for applicant in vacancy.applicants.all %}
+    <li><a href="/ner/person/{{ applicant.id}}">{{ applicant }}</a></li>
+    {% endfor %}
+
     </section>
+    <section>
+        <p><a href="/admin/ner/vacancy/{{ vacancy.id }}/">Edit this Vacancy</a></p>
+    </section>
+
 {% endblock %}

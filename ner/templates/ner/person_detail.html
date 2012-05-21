@@ -13,7 +13,7 @@ Person detail
     <div id="content-left">
     <section>
     <h3>Main details</h3>
-    <h4>Name:</h4> {{ person }} <br />
+    <h4>Name:</h4> {{ person }} <br /> 
     <h4>Date of Birth:</h4> {{ person.dob }} <br />
     <h4>Gender:</h4> {{ person.get_gender_display }} <br />
     {% if person.religion %}
@@ -58,7 +58,6 @@ Person detail
         {% endif %}
     {% endif %}
 
-
     {% if person.passport_no or person.discharge_book or person.medical_test_data %}
         <h3>Other Information</h3> 
         {% if person.passport_no %}
@@ -72,7 +71,8 @@ Person detail
         {% endif %}
     {% endif %} 
    
-    
+
+
     <section>
     <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
     </section>

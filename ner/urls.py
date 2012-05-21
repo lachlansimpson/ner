@@ -10,7 +10,7 @@ urlpatterns = patterns('ner.views',
         url(r'^people/$',
             ListView.as_view(#queryset=Person.objects.filter(dob__gt=latest_retirees_dob))),
                 queryset=Person.objects.filter(dob__gte =
-                                               datetime.datetime((datetime.datetime.today().year-61),1,1)))),
+                                               datetime.datetime((datetime.datetime.today().year-61),1,1)).order_by('surname'))),
 
         url(r'^person/(?P<pk>\d+)/$',
             DetailView.as_view(
