@@ -1,0 +1,206 @@
+[
+  {
+    "pk": 2,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP",
+      "course_content": "Management and Public Admin",
+      "person": 4,
+      "program": "Bachelor of Arts",
+      "duration": "3 Years",
+      "year_grad": "2002"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP",
+      "course_content": "History and Politics",
+      "person": 5,
+      "program": "BA/LLB",
+      "duration": "",
+      "year_grad": "2005"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "Australian National University",
+      "course_content": "Graduate Studies in International Affairs",
+      "person": 5,
+      "program": "International Relations and Politics Course",
+      "duration": "1 month",
+      "year_grad": "2008"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP",
+      "course_content": "",
+      "person": 6,
+      "program": "BA",
+      "duration": "",
+      "year_grad": "2007"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "National Institute of Rural Development (India)",
+      "course_content": "",
+      "person": 6,
+      "program": "Participatory Rural Development",
+      "duration": "6 weeks",
+      "year_grad": "2010"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP",
+      "course_content": "",
+      "person": 6,
+      "program": "Leadership Pacific Workshop",
+      "duration": "2 days",
+      "year_grad": "2005"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP, Fiji",
+      "course_content": "",
+      "person": 7,
+      "program": "Masters of Arts in Education",
+      "duration": "in process",
+      "year_grad": ""
+    }
+  },
+  {
+    "pk": 9,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP, Fiji",
+      "course_content": "",
+      "person": 7,
+      "program": "PostGrad Diploma in Education",
+      "duration": "2 years",
+      "year_grad": "2009"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP, Fiji",
+      "course_content": "",
+      "person": 7,
+      "program": "PostGrad Certificate in Education",
+      "duration": "2 years",
+      "year_grad": "2008"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "RMIT, Australia",
+      "course_content": "Environmental Science",
+      "person": 7,
+      "program": "Bachelor of Applied Science",
+      "duration": "3 years",
+      "year_grad": "1998"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "RMIT, Australia",
+      "course_content": "Science/Engineering",
+      "person": 7,
+      "program": "Certificate in Foundation Studies",
+      "duration": "1 year",
+      "year_grad": "1994"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "National Taiwan Normal University, Taipei",
+      "course_content": "",
+      "person": 8,
+      "program": "None given ",
+      "duration": "",
+      "year_grad": ""
+    }
+  },
+  {
+    "pk": 14,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "Ming Chuan University, Taoyuan",
+      "course_content": "",
+      "person": 8,
+      "program": "None given",
+      "duration": "",
+      "year_grad": ""
+    }
+  },
+  {
+    "pk": 15,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "Kiribati Teachers College",
+      "course_content": "",
+      "person": 9,
+      "program": "Junior Secondary School",
+      "duration": "3 years",
+      "year_grad": "2010"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "Kiribati Teachers College",
+      "course_content": "",
+      "person": 9,
+      "program": "Teaching English as a Second Language",
+      "duration": "",
+      "year_grad": "2010"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "KIT",
+      "course_content": "",
+      "person": 9,
+      "program": "Registry Clerk",
+      "duration": "",
+      "year_grad": "2007"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "ner.certificate",
+    "fields": {
+      "institute": "USP, Kiribati",
+      "course_content": "",
+      "person": 9,
+      "program": "Teaching English as a Second Language",
+      "duration": "",
+      "year_grad": "2005"
+    }
+  }
+]

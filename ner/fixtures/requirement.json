@@ -1,0 +1,50 @@
+[
+  {
+    "pk": 1,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Can Type",
+      "req_notes": "More than 50 wpm"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Speaks English",
+      "req_notes": ""
+    }
+  },
+  {
+    "pk": 3,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Speaks Chinese",
+      "req_notes": ""
+    }
+  },
+  {
+    "pk": 4,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Can Type",
+      "req_notes": "100 wpm"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Bachelor Degree",
+      "req_notes": "Arts or Public Policy"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "ner.requirement",
+    "fields": {
+      "req_name": "Masters in Education",
+      "req_notes": "Diploma"
+    }
+  }
+]
