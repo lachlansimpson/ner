@@ -13,64 +13,65 @@ Person detail
     <div id="content-left">
     <section>
     <h3>Main details</h3>
-    <h4>Name:</h4> {{ person }} <br /> 
-    <h4>Date of Birth:</h4> {{ person.dob }} <br />
-    <h4>Gender:</h4> {{ person.get_gender_display }} <br />
+    <strong>Name:</strong> {{ person }} <br /> 
+    <strong>Date of Birth:</strong> {{ person.dob }} <br />
+    <strong>Gender:</strong> {{ person.get_gender_display }} <br />
     {% if person.religion %}
-    <h4>Religion:</h4> {{ person.religion }} <br />
+    <strong>Religion:</strong> {{ person.religion }} <br />
     {% endif %}
     {% if person.marital_status %}
-    <h4>Marital status:</h4> {{ person.get_marital_status_display }} <br />
+    <strong>Marital status:</strong> {{ person.get_marital_status_display }} <br />
     {% endif %}    
     {% if person.number_of_dependants %}
-    <h4>Number of dependants:</h4> {{ person.number_of_dependants }} <br />
+    <strong>Number of dependants:</strong> {{ person.number_of_dependants }} <br />
     {% endif %}
-    <h4>Address:</h4> {{ person.current_address }}
+    <strong>Address:</strong> {{ person.current_address }}
+
 
     {% if person.phone_mobile or person.email or person.phone_home or person.phone_other %}
         <h3>Contact Details</h3>
         {% if person.phone_mobile %}
-        <h4>Mobile:</h4> {{ person.phone_mobile }} <br />
+        <strong>Mobile:</strong> {{ person.phone_mobile }} <br />
         {% endif %}
         {% if person.email %}
-        <h4>Email:</h4> {{ person.email }} <br />
+        <strong>Email:</strong> {{ person.email }} <br />
         {% endif %}
         {% if person.phone_home %}
-        <h4>Home Phone:</h4> {{ person.phone_home }} <br />
+        <strong>Home Phone:</strong> {{ person.phone_home }} <br />
         {% endif %}
         {% if person.phone_other %}
-        <h4>Other Phone:</h4> {{ person.phone_other }} <br />
+        <strong>Other Phone:</strong> {{ person.phone_other }} <br />
         {% endif %}
     {% endif %}
     
     {% if person.home_island or person.birth_place or person.island_represented %}
         <h3>Islands</h3>
         {% if person.home_island %}
-        <h4>Home Island:</h4> {{ person.get_home_island_display }} <br />
+        <strong>Home Island:</strong> {{ person.get_home_island_display }} <br />
         {% endif %}
         {% if person.birth_place %}
-        <h4>Birth Place:</h4> {{ person.get_birth_place_display }} <br />
+        <strong>Birth Place:</strong> {{ person.get_birth_place_display }} <br />
         {% endif %}
         {% if person.island_represented %}
-        <h4>Island Represented:</h4> {{ person.get_island_represented_display }} <br />
+        <strong>Island Represented:</strong> {{ person.get_island_represented_display }} <br />
         {% endif %}
     {% endif %}
 
     {% if person.passport_no or person.discharge_book or person.medical_test_data %}
         <h3>Other Information</h3> 
         {% if person.passport_no %}
-        <h4>Passport Number:</h4> {{ person.passport_no }} <br />
+        <strong>Passport Number:</strong> {{ person.passport_no }} <br />
         {% endif %}
         {% if person.discharge_book %}
-        <h4>Discharge Book:</h4> {{ person.discharge_book }} <br />
+        <strong>Discharge Book:</strong> {{ person.discharge_book }} <br />
         {% endif %}
         {% if person.medical_test_date %}
-        <h4>Last Medical Test on {{ person.medical_test_date }} <br />
+        <strong>Last Medical Test on {{ person.medical_test_date }} <br />
         {% endif %}
     {% endif %} 
     </section>
     </div>
-   	<div id="content-right"> 
+    <div id="content-right"> 
 	{% if person.certificate_set %}
 	<h3>Certificates</h3>
 	{% for cert in person.certificate_set.all %}
@@ -103,7 +104,16 @@ Person detail
     {% endfor %}
     {% endif %}
 
-    <section>
+    {% if person.vacancy_set %}
+    <h3>Jobs Applied For</h3>
+    	{% for job in person.vacancy_set.all %}
+    	<p>
+    	<a href="{{ job }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}</em></a>
+    	</p>
+    	{% endif %}
+    	{% endfor %}
+    {% endif %}
+<section>
     <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
     </section>
 </div>
