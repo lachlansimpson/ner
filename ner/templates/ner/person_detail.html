@@ -71,8 +71,19 @@ Person detail
         {% endif %}
     {% endif %} 
    
-
-
+    {% if person.certificate_set %}
+	<h3>Certificates</h3>
+	{% for cert in person.certificate_set.all %}
+		<p><strong>Insititute:</strong> {{ cert.institute }}<br />
+		<strong>Program:</strong> {{ cert.program }}<br />
+		{% if cert.course_content %}
+		<strong>Content:</strong> {{ cert.course_content }}<br />{% endif %}
+		{% if cert.year_grad %}
+		<strong>Graduation:</strong> {{ cert.year_grad }}<br />{% endif %}
+		{% if cert.duration %}
+		<strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
+    	{% endfor %}
+	{% endif %}
     <section>
     <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
     </section>
