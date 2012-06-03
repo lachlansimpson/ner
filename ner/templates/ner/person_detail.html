@@ -42,9 +42,7 @@ Person detail
         <h4>Other Phone:</h4> {{ person.phone_other }} <br />
         {% endif %}
     {% endif %}
-    </section>
-    </div>
-    <div id="content-right">
+    
     {% if person.home_island or person.birth_place or person.island_represented %}
         <h3>Islands</h3>
         {% if person.home_island %}
@@ -70,8 +68,10 @@ Person detail
         <h4>Last Medical Test on {{ person.medical_test_date }} <br />
         {% endif %}
     {% endif %} 
-   
-    {% if person.certificate_set %}
+    </section>
+    </div>
+   	<div id="content-right"> 
+	{% if person.certificate_set %}
 	<h3>Certificates</h3>
 	{% for cert in person.certificate_set.all %}
 		<p><strong>Insititute:</strong> {{ cert.institute }}<br />
@@ -84,6 +84,25 @@ Person detail
 		<strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
     	{% endfor %}
 	{% endif %}
+
+    {% if person.experience_set %}
+	<h3>Work Experience</h3>
+	{% for xp in person.experience_set.all %}
+	<p>
+	<strong>Title:</strong>{{ xp.title }}<br />
+	<strong>Organisation:</strong>{{ xp.organisation }}<br />
+	<strong>Start date:</strong>{{ xp.start_date }}
+	<strong>End date:</strong>{{ xp.end_date }}<br />
+	{% if xp.reference_name %}
+	<strong>Referee:</strong>{{  xp.reference_name }}<br />{% endif %}
+	{% if xp.reference_contact_phone %}
+	<strong>Referee Phone:</strong>{{  xp.reference_contact_phone }}{% endif %}
+	{% if xp.reference_contact_email %}
+	<strong>Referee Email:</strong>{{  xp.refernece_contact_email }}<br />{% endif %}
+	</p>
+    {% endfor %}
+    {% endif %}
+
     <section>
     <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
     </section>
