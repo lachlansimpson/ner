@@ -69,9 +69,6 @@ Person detail
     <strong>Last Medical Test on {{ person.medical_test_date }} <br />
         {% endif %}
         {% endif %} 
-        </section>
-    </div>
-    <div id="content-right"> 
         {% if person.certifications %}
         <h3>Certifications</h3>
         {% for cert in person.certifications.all %}
@@ -86,6 +83,9 @@ Person detail
         {% endfor %}
         {% endif %}
 
+        </section>
+    </div>
+    <div id="content-right"> 
         {% if person.experiences %}
         <h3>Work Experience</h3>
         {% for xp in person.experiences.all %}
