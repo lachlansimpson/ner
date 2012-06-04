@@ -17,6 +17,7 @@ class ApplicantsInline(admin.StackedInline):
     model = Vacancy.applicants.through
     verbose_name='Has applied for'
     verbose_name_plural='Jobs Applied For'
+    template = 'admin/collapsed_tabular_inline.html'
 
 class CertInline(admin.TabularInline):
     model = Certificate
