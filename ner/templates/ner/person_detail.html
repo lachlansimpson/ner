@@ -10,7 +10,7 @@ Person detail
 {% endblock %}
 
 {% block content %}
-    <div id="content-left">
+<div id="content-left">
     <section>
     <h3>Main details</h3>
     <strong>Name:</strong> {{ person }} <br /> 
@@ -29,92 +29,93 @@ Person detail
 
 
     {% if person.phone_mobile or person.email or person.phone_home or person.phone_other %}
-        <h3>Contact Details</h3>
-        {% if person.phone_mobile %}
-        <strong>Mobile:</strong> {{ person.phone_mobile }} <br />
-        {% endif %}
-        {% if person.email %}
-        <strong>Email:</strong> {{ person.email }} <br />
-        {% endif %}
-        {% if person.phone_home %}
-        <strong>Home Phone:</strong> {{ person.phone_home }} <br />
-        {% endif %}
-        {% if person.phone_other %}
-        <strong>Other Phone:</strong> {{ person.phone_other }} <br />
-        {% endif %}
+    <h3>Contact Details</h3>
+    {% if person.phone_mobile %}
+    <strong>Mobile:</strong> {{ person.phone_mobile }} <br />
     {% endif %}
-    
+    {% if person.email %}
+    <strong>Email:</strong> {{ person.email }} <br />
+    {% endif %}
+    {% if person.phone_home %}
+    <strong>Home Phone:</strong> {{ person.phone_home }} <br />
+    {% endif %}
+    {% if person.phone_other %}
+    <strong>Other Phone:</strong> {{ person.phone_other }} <br />
+    {% endif %}
+    {% endif %}
+
     {% if person.home_island or person.birth_place or person.island_represented %}
-        <h3>Islands</h3>
-        {% if person.home_island %}
-        <strong>Home Island:</strong> {{ person.get_home_island_display }} <br />
-        {% endif %}
-        {% if person.birth_place %}
-        <strong>Birth Place:</strong> {{ person.get_birth_place_display }} <br />
-        {% endif %}
-        {% if person.island_represented %}
-        <strong>Island Represented:</strong> {{ person.get_island_represented_display }} <br />
-        {% endif %}
+    <h3>Islands</h3>
+    {% if person.home_island %}
+    <strong>Home Island:</strong> {{ person.get_home_island_display }} <br />
+    {% endif %}
+    {% if person.birth_place %}
+    <strong>Birth Place:</strong> {{ person.get_birth_place_display }} <br />
+    {% endif %}
+    {% if person.island_represented %}
+    <strong>Island Represented:</strong> {{ person.get_island_represented_display }} <br />
+    {% endif %}
     {% endif %}
 
     {% if person.passport_no or person.discharge_book or person.medical_test_data %}
-        <h3>Other Information</h3> 
-        {% if person.passport_no %}
-        <strong>Passport Number:</strong> {{ person.passport_no }} <br />
+    <h3>Other Information</h3> 
+    {% if person.passport_no %}
+    <strong>Passport Number:</strong> {{ person.passport_no }} <br />
+    {% endif %}
+    {% if person.discharge_book %}
+    <strong>Discharge Book:</strong> {{ person.discharge_book }} <br />
+    {% endif %}
+    {% if person.medical_test_date %}
+    <strong>Last Medical Test on {{ person.medical_test_date }} <br />
         {% endif %}
-        {% if person.discharge_book %}
-        <strong>Discharge Book:</strong> {{ person.discharge_book }} <br />
-        {% endif %}
-        {% if person.medical_test_date %}
-        <strong>Last Medical Test on {{ person.medical_test_date }} <br />
-        {% endif %}
-    {% endif %} 
-    </section>
+        {% endif %} 
+        </section>
     </div>
     <div id="content-right"> 
-	{% if person.certificate_set %}
-	<h3>Certificates</h3>
-	{% for cert in person.certificate_set.all %}
-		<p><strong>Insititute:</strong> {{ cert.institute }}<br />
-		<strong>Program:</strong> {{ cert.program }}<br />
-		{% if cert.course_content %}
-		<strong>Content:</strong> {{ cert.course_content }}<br />{% endif %}
-		{% if cert.year_grad %}
-		<strong>Graduation:</strong> {{ cert.year_grad }}<br />{% endif %}
-		{% if cert.duration %}
-		<strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
-    	{% endfor %}
-	{% endif %}
+        {% if person.certifications %}
+        <h3>Certifications</h3>
+        {% for cert in person.certifications.all %}
+        <p><strong>Insititute:</strong> {{ cert.institute }}<br />
+        <strong>Program:</strong> {{ cert.program }}<br />
+        {% if cert.course_content %}
+        <strong>Content:</strong> {{ cert.course_content }}<br />{% endif %}
+        {% if cert.year_grad %}
+        <strong>Graduation:</strong> {{ cert.year_grad }}<br />{% endif %}
+        {% if cert.duration %}
+        <strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
+        {% endfor %}
+        {% endif %}
 
-    {% if person.experience_set %}
-	<h3>Work Experience</h3>
-	{% for xp in person.experience_set.all %}
-	<p>
-	<strong>Title:</strong>{{ xp.title }}<br />
-	<strong>Organisation:</strong>{{ xp.organisation }}<br />
-	<strong>Start date:</strong>{{ xp.start_date }}
-	<strong>End date:</strong>{{ xp.end_date }}<br />
-	{% if xp.reference_name %}
-	<strong>Referee:</strong>{{  xp.reference_name }}<br />{% endif %}
-	{% if xp.reference_contact_phone %}
-	<strong>Referee Phone:</strong>{{  xp.reference_contact_phone }}{% endif %}
-	{% if xp.reference_contact_email %}
-	<strong>Referee Email:</strong>{{  xp.refernece_contact_email }}<br />{% endif %}
-	</p>
-    {% endfor %}
-    {% endif %}
+        {% if person.experiences %}
+        <h3>Work Experience</h3>
+        {% for xp in person.experiences.all %}
+        <p>
+        <strong>Title:</strong>{{ xp.title }}<br />
+        <strong>Organisation:</strong>{{ xp.organisation }}<br />
+        <strong>Start date:</strong>{{ xp.start_date }}
+        <strong>End date:</strong>{{ xp.end_date }}<br />
+        {% if xp.reference_name %}
+        <strong>Referee:</strong>{{  xp.reference_name }}<br />{% endif %}
+        {% if xp.reference_contact_phone %}
+        <strong>Referee Phone:</strong>{{  xp.reference_contact_phone }}{% endif %}
+        {% if xp.reference_contact_email %}
+        <strong>Referee Email:</strong>{{  xp.refernece_contact_email }}<br />{% endif %}
+        </p>
+        {% endfor %}
+        {% endif %}
 
-    {% if person.vacancy_set %}
-    <h3>Jobs Applied For</h3>
-    	{% for job in person.vacancy_set.all %}
-    	<p>
-    	<a href="{{ job }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}</em></a>
-    	</p>
-    	{% endif %}
-    	{% endfor %}
-    {% endif %}
-<section>
-    <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
-    </section>
-</div>
-{% endblock %}
+        {% if person.jobs %}
+        <h3>Jobs Applied For</h3>
+        {% for job in person.jobs.all %}
+        <p>
+        <a href="{{ job }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}</em></a>
+        </p>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <section>
+        <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
+        </section>
+    </div>
+    {% endblock %}

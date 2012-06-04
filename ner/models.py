@@ -196,7 +196,7 @@ class FTCQualification(models.Model):
     year_grad = models.CharField('Year of graduation',max_length=5, blank='True')
 
 class Certificate(models.Model):
-    person = models.ForeignKey('Person', blank='True', null='True')
+    person = models.ForeignKey('Person', related_name='certifications', blank='True', null='True')
     institute = models.CharField(max_length=50)
     program = models.CharField(max_length=100)
     course_content = models.CharField(max_length=200, blank='True', null='True')
@@ -256,7 +256,7 @@ class Vacancy(models.Model):
     '''
     #certificates = models.ManyToManyField(Certificate, blank='True',
     #                                     null='True')
-    applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='doodaa', 
+    applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='jobs', 
                                         blank='True', null='True')
 
     def __unicode__(self):
@@ -268,7 +268,7 @@ class Experience(models.Model):
         verbose_name = "Work Experience"
         verbose_name_plural = "Work Experience"
 
-    person = models.ForeignKey('Person')
+    person = models.ForeignKey('Person', related_name='experiences')
     title = models.CharField(max_length=40)
     organisation = models.ForeignKey('Organisation')
     start_date = models.DateField()
