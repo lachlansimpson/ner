@@ -87,7 +87,7 @@ class PersonAdmin(admin.ModelAdmin):
     ]
     inlines = [CertInline, ExperienceInline, ShipXPInline, FTCQualInline, ApplicantsInline]
     list_filter = ('gender',)
-    list_display = ('first_name','surname','birth_place',)
+    list_display = ('__unicode__','birth_place',)
     search_fields = ('first_name',)
     form = PersonAdminForm
 
