@@ -185,6 +185,9 @@ class Person(models.Model):
         """Person reference: full name and ID # """
         """ return self.first_name + ' ' + self.surname + ', ' + self.pk """
         return self.first_name + ' ' + self.surname
+    
+    def first_letter(self):
+        return self.surname and self.surname[0] or ''
 
 class FTCQualification(models.Model):
     class Meta:
