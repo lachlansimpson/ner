@@ -13,7 +13,8 @@ Person detail
 <div id="content-left">
     <section>
     <h3>Main details</h3>
-    <strong>Name:</strong> {{ person }} <br /> 
+    <strong>Name:</strong> {{ person }} <br />
+    <strong>ID Number:</strong>{{ person.id }}<br /> 
     <strong>Date of Birth:</strong> {{ person.dob }} <br />
     <strong>Gender:</strong> {{ person.get_gender_display }} <br />
     {% if person.religion %}
