@@ -180,6 +180,7 @@ class Person(models.Model):
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
     skills = models.ManyToManyField(Requirement, blank='True', null='True')
+    labour_id = models.IntegerField('Worker ID#', editable='False')
 
     def __unicode__(self):
         """Person reference: full name and ID # """
@@ -188,6 +189,15 @@ class Person(models.Model):
     
     def first_letter(self):
         return self.surname and self.surname[0] or ''
+
+    def save(self, *args, **kwargs):
+        """ This adds the labour id - based on the personal key of the table to
+        ensure uniqueness and incrementability. The field is otherwise
+        uneditable for data integrity
+        """
+        last = Person.objects.order_by('-id')[0]
+        self.labour_id = last.pk + 100001
+        super(Person, self).save(*args, **kwargs) # Call the "real" save() method.
 
 class FTCQualification(models.Model):
     class Meta:
