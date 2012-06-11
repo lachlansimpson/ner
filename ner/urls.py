@@ -7,9 +7,11 @@ import datetime
 urlpatterns = patterns('ner.views',
         url(r'^$', 'index'),
 
-        url(r'^people/$',
-            ListView.as_view(queryset=Person.objects.filter(dob__gte = datetime.datetime((datetime.datetime.today().year-61),1,1)).order_by('surname'))),
+        url(r'^everyone/$',
+            ListView.as_view(queryset=Person.people.all().order_by('surname'))),
 
+        url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
+        
         url(r'^person/(?P<pk>\d+)/$',
             DetailView.as_view(
                 model=Person)),

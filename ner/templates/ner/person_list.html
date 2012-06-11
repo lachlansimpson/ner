@@ -11,10 +11,18 @@ List of people available
 
 {% block content %}
 {% if person_list %}
-{% regroup person_list by first_letter as letter_list %}
-<ul>
+
+{% regroup person_list by first_letter as letter_list %} 
+{% comment %} 
+
+{% regroup person_list by last|first|upper as letter_list %}
+{% endcomment %}
+{% for letter in letter_list %}
+    <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
+{% endfor %}
+    
     {% for letter in letter_list %}
-    <li> {{ letter.grouper }}
+    <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
     <ul>
         {% for person in letter.list %}
             <li><a href="/ner/person/{{ person.id }}/">{{ person }}</a></li>
@@ -22,7 +30,6 @@ List of people available
     </ul>
     </li>
     {% endfor %}
-</ul>
 {% else %}
     <p>No people are available.</p>
 {% endif %}

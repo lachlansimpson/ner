@@ -15,6 +15,7 @@ Salary levels
 """
 
 from django.db import models
+import datetime
 
 ISLAND_CHOICES = (
     ('01',u'N/A'), 
@@ -143,6 +144,14 @@ class Requirement(models.Model):
         else:
             return self.req_name
 
+day = datetime.date.today().day
+month = datetime.date.today().month
+year = datetime.date.today().year - 50
+
+class WorkManager(models.Manager):
+    def get_query_set(self):
+        return super(WorkManager, self).get_query_set().filter(dob__gte = datetime.datetime(year, month, day)).order_by('surname')
+
 class Person(models.Model):
     class Meta: 
         verbose_name_plural = "People"
@@ -182,6 +191,9 @@ class Person(models.Model):
     skills = models.ManyToManyField(Requirement, blank='True', null='True')
     labour_id = models.IntegerField('Worker ID#', editable='False')
 
+    people = models.Manager()
+    workers = WorkManager()
+    
     def __unicode__(self):
         """Person reference: full name and ID # """
         """ return self.first_name + ' ' + self.surname + ', ' + self.pk """
@@ -196,7 +208,7 @@ class Person(models.Model):
         uneditable for data integrity
         """
         last = Person.objects.order_by('-id')[0]
-        self.labour_id = last.pk + 100001
+        self.labour_id = last.pk + 100001 #100000 for aesthetics, 1 for increment
         super(Person, self).save(*args, **kwargs) # Call the "real" save() method.
 
 class FTCQualification(models.Model):
