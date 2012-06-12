@@ -11,12 +11,21 @@ National Employment Register
     <section>
     <h2>Welcome, {{ user.first_name }}</h2>
     <h3>General Lists</h3>
-    <p><a href="/ner/people/">List all People</a></p>
+    <h4>Find a person</h4>
+    <p><a href="/ner/people/">List all non-retired People</a></p>
+    <p><a href="/ner/people/all/">List all People</a></p>
+
+    <h4>Find an Organisation</h4>
     <p><a href="/ner/orgs/islands/">List all Organisations by island</a></p>
     <p><a href="/ner/orgs/isic/">List all Organisations by ISIC code</a></p>
     <p><a href="/ner/orgs/category/">List all Organisations by Category</a></p>
-    <p><a href="/ner/vacancies/">List all Job vacancies</a></p>
-    <p><a href="/ner/vacancies/requirements">List all Job vacancies by requirement</a></p>
+    
+    <h4>Find a Vacancy</h4>
+    <p><a href="/ner/vacancies/">List all open Job vacancies</a></p>
+    <p><a href="/ner/vacancies/requirements">List all open Job vacancies by requirement</a></p>
+    <p><a href="/ner/vacancies/recent">List recently closed Job vacancies (last 30 days)</a></p>
+    <p><a href="/ner/vacancies/all">List all Job vacancies, open and closed</a></p>
+
 
     </section>
     

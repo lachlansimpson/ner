@@ -7,8 +7,9 @@ import datetime
 urlpatterns = patterns('ner.views',
         url(r'^$', 'index'),
 
-        url(r'^everyone/$',
-            ListView.as_view(queryset=Person.people.all().order_by('surname'))),
+        url(r'^people/all/$',
+            ListView.as_view(queryset=Person.people.all().order_by('surname'),
+                             template_name="ner/all_person_list.html")),
 
         url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
         
@@ -54,9 +55,18 @@ urlpatterns = patterns('ner.views',
                 queryset=Requirement.objects.all().order_by("req_name"),
                 template_name="ner/vac_req_list.html")),
         
+        url(r'^vacancies/recent/$',
+            ListView.as_view(
+                queryset=Vacancy.recent.all(),
+                template_name="ner/recent_vacancy_list.html")),
+        
         url(r'^vacancies/$',
             ListView.as_view(
-                queryset=Vacancy.objects.all())),
+                queryset=Vacancy.open.all())),
+        
+        url(r'^vacancies/all/$',
+            ListView.as_view(
+                queryset=Vacancy.complete.all())),
         
         url(r'^vacancy/(?P<pk>\d+)/$',
             DetailView.as_view(

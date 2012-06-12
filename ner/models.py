@@ -17,6 +17,22 @@ Salary levels
 from django.db import models
 import datetime
 
+"""
+datetime is used to calculate dates for: workers must be below retirement age
+and vacanacies can be "open" or "closed"
+Anything closed in the last 30 days is 'recently closed'.
+"""
+today = datetime.date.today()
+#year = datetime.date.today().year
+#day = datetime.date.today().day
+#month = datetime.date.today().month
+year = today.year
+month = today.month
+day = today.day
+retire_year = year - 50
+recent_closed_date = datetime.date.today()-datetime.timedelta(30)
+
+
 ISLAND_CHOICES = (
     ('01',u'N/A'), 
     ('02',u'Tarawa'),
@@ -144,13 +160,9 @@ class Requirement(models.Model):
         else:
             return self.req_name
 
-day = datetime.date.today().day
-month = datetime.date.today().month
-year = datetime.date.today().year - 50
-
 class WorkManager(models.Manager):
     def get_query_set(self):
-        return super(WorkManager, self).get_query_set().filter(dob__gte = datetime.datetime(year, month, day)).order_by('surname')
+        return super(WorkManager, self).get_query_set().filter(dob__gte = datetime.datetime(retire_year, month, day)).order_by('surname')
 
 class Person(models.Model):
     class Meta: 
@@ -251,6 +263,14 @@ class Organisation(models.Model):
         else:
             return self.name + ', all islands'
 
+class OpenVacancyManager(models.Manager):
+    def get_query_set(self):
+        return super(OpenVacancyManager, self).get_query_set().filter(closing_date__gte = today)
+
+class RecentlyClosedVacancyManager(models.Manager):
+    def get_query_set(self):
+        return super(RecentlyClosedVacancyManager, self).get_query_set().filter(closing_date__range=(recent_closed_date, today))
+
 class Vacancy(models.Model):
     class Meta:
         verbose_name_plural = "Vacancies"
@@ -274,16 +294,12 @@ class Vacancy(models.Model):
 
     closing_date = models.DateField()
     requirements = models.ManyToManyField(Requirement)
-    '''
-    TODO: I've just realised that adding Certificates to Vacancy wont work as 
-    each Certificate is ManyToMany to a person. People and Certificates may 
-    need to be de-coupled, depending on clients needs.
-    '''
-    #certificates = models.ManyToManyField(Certificate, blank='True',
-    #                                     null='True')
     applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='jobs', 
                                         blank='True', null='True')
-
+    complete = models.Manager()
+    open = OpenVacancyManager()
+    recent = RecentlyClosedVacancyManager()
+    
     def __unicode__(self):
         """ Vacancy reference """
         return self.title + ' at ' + self.organisation.name + ',  ' + str(self.closing_date)
