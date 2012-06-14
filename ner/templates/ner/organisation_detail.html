@@ -5,9 +5,10 @@ Organisation detail of the portal.
 {% block title %}
 Organisation detail
 {% endblock %}
-
+{% block coltype %}colMS{% endblock %}
 {% block content %}
-    <section>
+{{ block.super }}
+<section>
     
     <p><h4>Name:</h4> {{ organisation.name }}</p>
     {% if organisation.island %}<p><h4>

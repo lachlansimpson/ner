@@ -4,13 +4,14 @@
 Vacancy detail page of the portal.
 
 {% endcomment %}
-
+{% block coltype %}colMS{% endblock %}
 {% block title %}
 Vacancy details
 {% endblock %}
 
 {% block content %}
-    <section>
+{{ block.super }}
+<section>
 
     <p><h4>Job Title:</h4> {{ vacancy.title }}</p>
     <p><h4>Organisation:</h4> <a href="/ner/organisation/{{ vacancy.organisation.slug}}/">{{ vacancy.organisation }}</a></p>
