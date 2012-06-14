@@ -1,9 +1,8 @@
 {% extends "ner/base.html" %}
-{% load i18n %}
+{% load i18n admin_static %}
 
 {% block title %}{{ title }}{% trans 'National Employment Register site' %}{% endblock %}
 
-{% block branding %}
+{% block branding %}{{ block.super }}
 <h1 id="site-name">{% trans 'National Employment Register' %}</h1>
 {% endblock %}
-{% block nav-global %}{% endblock %}

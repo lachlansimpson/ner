@@ -1,47 +1,28 @@
 {% extends "ner/base_site.html" %}
+{% comment %}
+
 {% load i18n admin_static %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
 
-{% block coltype %}colMS{% endblock %}
+
 {% block bodyclass %}dashboard{% endblock %}
 {% block breadcrumbs %}{% endblock %}
+{% endcomment %}
+{% block coltype %}colMS{% endblock %}
 {% block content %}
-<div id="content-main">
+{{ block.super }}
 {% if vacancy_list %}
+    {% regroup vacancy_list by closing_date as dated_list %}
+    {% for close_date in dated_list %}
+    <h3>{{ close_date.grouper }}  
     <ul>
-    {% for job in vacancy_list %}
+    {% for job in close_date.list %}
         <li><a href="/ner/vacancy/{{ job.id }}/">{{ job }}</a></li>
     {% endfor %}
     </ul>
+    {% endfor %}
 {% else %}
     <p>No Vacancies are available.</p>
     {% endif %}
-</div>
-
-<div id="content-related">
- <section>
-    <h3>General Lists</h3>
-    <h4>Workers</h4>
-    <a href="/ner/people/">List all non-retired People</a><br />
-    <a href="/ner/people/all/">List all People</a>
-
-    <h4>Organisations</h4>
-    <a href="/ner/orgs/islands/">List all Organisations by island</a><br />
-    <a href="/ner/orgs/isic/">List all Organisations by ISIC code</a><br />
-    <a href="/ner/orgs/category/">List all Organisations by Category</a><br />
-    
-    <h4>Vacancies</h4>
-    <a href="/ner/vacancies/">List all open Job vacancies</a><br />
-    <a href="/ner/vacancies/requirements">List all open Job vacancies by requirement</a><br />
-    <a href="/ner/vacancies/recent">List recently closed Job vacancies (last 30 days)</a><br />
-    <a href="/ner/vacancies/all">List all Job vacancies, open and closed</a><br />
-    </section>
-    <section>
-    <h3>Add a new...</h3>
-    <a href="/admin/ner/person/add">Create a new Person</a><br />
-    <a href="/admin/ner/organisation/add">Create a new Organisation</a><br />
-    <a href="/admin/ner/vacancy/add">Create a new Job vacancy</a><br />
-</section>
 {% endblock %}
-</div>

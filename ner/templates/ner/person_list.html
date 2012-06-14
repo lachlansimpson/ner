@@ -8,16 +8,12 @@ Person list page of the portal.
 {% block title %}
 List of people available
 {% endblock %}
-
+{% block coltype %}colMS{% endblock %}
 {% block content %}
-<h3>Workers register</h3>
+{{ block.super }}<h3>Workers register</h3>
 {% if person_list %}
 
 {% regroup person_list by first_letter as letter_list %} 
-{% comment %} 
-
-{% regroup person_list by last|first|upper as letter_list %}
-{% endcomment %}
 {% for letter in letter_list %}
     <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
 {% endfor %}
@@ -33,5 +29,6 @@ List of people available
     {% endfor %}
 {% else %}
     <p>No people are available.</p>
-{% endif %}
+    {% endif %}
+
 {% endblock %}

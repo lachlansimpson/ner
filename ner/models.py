@@ -302,7 +302,7 @@ class Vacancy(models.Model):
     
     def __unicode__(self):
         """ Vacancy reference """
-        return self.title + ' at ' + self.organisation.name + ',  ' + str(self.closing_date)
+        return self.title + ' at ' + self.organisation.name
 
 class Experience(models.Model):
     class Meta:

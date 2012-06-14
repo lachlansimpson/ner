@@ -8,9 +8,9 @@ Organisation list page of the portal.
 {% block title %}
 Organisation list
 {% endblock %}
-
+{% block coltype %}colMS{% endblock %}
 {% block content %}
-{% if organisation_list %}
+    {{ block.super }}{% if organisation_list %}
 
 {% regroup organisation_list|dictsort:"category" by get_category_display as category_list %}
     <ul>
@@ -25,5 +25,6 @@ Organisation list
         {% endfor %}
 {% else %}
     <p>No Organisations are available.</p>
-{% endif %}
+    {% endif %}
+
 {% endblock %}

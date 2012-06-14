@@ -8,8 +8,9 @@ Requirement list page of the portal.
 {% block title %}
 Requirement list
 {% endblock %}
-
+{% block coltype %}colMS{% endblock %}
 {% block content %}
+{{ block.super }}
 {% if requirement_list %}
     {% regroup requirement_list by req_name as req_list %}
     <ul>
@@ -26,5 +27,6 @@ Requirement list
     </ul>
 {% else %}
     <p>No Vacancies are available.</p>
-{% endif %}
+    {% endif %}
+
 {% endblock %}
