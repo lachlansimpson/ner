@@ -1,38 +1,47 @@
 {% extends "ner/base_site.html" %}
-{% comment %}
-Main page of the portal.
-{% endcomment %}
+{% load i18n admin_static %}
 
-{% block title %}
-National Employment Register
-{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
 
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}dashboard{% endblock %}
+{% block breadcrumbs %}{% endblock %}
 {% block content %}
-    <section>
-    <h2>Welcome, {{ user.first_name }}</h2>
+<div id="content-main">
+{% if vacancy_list %}
+    <ul>
+    {% for job in vacancy_list %}
+        <li><a href="/ner/vacancy/{{ job.id }}/">{{ job }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Vacancies are available.</p>
+    {% endif %}
+</div>
+
+<div id="content-related">
+ <section>
     <h3>General Lists</h3>
-    <h4>Find a person</h4>
-    <p><a href="/ner/people/">List all non-retired People</a></p>
-    <p><a href="/ner/people/all/">List all People</a></p>
+    <h4>Workers</h4>
+    <a href="/ner/people/">List all non-retired People</a><br />
+    <a href="/ner/people/all/">List all People</a>
 
-    <h4>Find an Organisation</h4>
-    <p><a href="/ner/orgs/islands/">List all Organisations by island</a></p>
-    <p><a href="/ner/orgs/isic/">List all Organisations by ISIC code</a></p>
-    <p><a href="/ner/orgs/category/">List all Organisations by Category</a></p>
+    <h4>Organisations</h4>
+    <a href="/ner/orgs/islands/">List all Organisations by island</a><br />
+    <a href="/ner/orgs/isic/">List all Organisations by ISIC code</a><br />
+    <a href="/ner/orgs/category/">List all Organisations by Category</a><br />
     
-    <h4>Find a Vacancy</h4>
-    <p><a href="/ner/vacancies/">List all open Job vacancies</a></p>
-    <p><a href="/ner/vacancies/requirements">List all open Job vacancies by requirement</a></p>
-    <p><a href="/ner/vacancies/recent">List recently closed Job vacancies (last 30 days)</a></p>
-    <p><a href="/ner/vacancies/all">List all Job vacancies, open and closed</a></p>
-
-
+    <h4>Vacancies</h4>
+    <a href="/ner/vacancies/">List all open Job vacancies</a><br />
+    <a href="/ner/vacancies/requirements">List all open Job vacancies by requirement</a><br />
+    <a href="/ner/vacancies/recent">List recently closed Job vacancies (last 30 days)</a><br />
+    <a href="/ner/vacancies/all">List all Job vacancies, open and closed</a><br />
     </section>
-    
     <section>
     <h3>Add a new...</h3>
-    <p><a href="/admin/ner/person/add">Create a new Person</a></p>
-    <p><a href="/admin/ner/organisation/add">Create a new Organisation</a></p>
-    <p><a href="/admin/ner/vacancy/add">Create a new Job vacancy</a></p>
+    <a href="/admin/ner/person/add">Create a new Person</a><br />
+    <a href="/admin/ner/organisation/add">Create a new Organisation</a><br />
+    <a href="/admin/ner/vacancy/add">Create a new Job vacancy</a><br />
 </section>
 {% endblock %}
+</div>

@@ -265,11 +265,11 @@ class Organisation(models.Model):
 
 class OpenVacancyManager(models.Manager):
     def get_query_set(self):
-        return super(OpenVacancyManager, self).get_query_set().filter(closing_date__gte = today)
+        return super(OpenVacancyManager, self).get_query_set().filter(closing_date__gte = today).order_by('closing_date')
 
 class RecentlyClosedVacancyManager(models.Manager):
     def get_query_set(self):
-        return super(RecentlyClosedVacancyManager, self).get_query_set().filter(closing_date__range=(recent_closed_date, today))
+        return super(RecentlyClosedVacancyManager, self).get_query_set().filter(closing_date__range=(recent_closed_date, today)).order_by('-closing_date')
 
 class Vacancy(models.Model):
     class Meta:
@@ -337,20 +337,3 @@ class ShipExperience(models.Model):
         """Ship Experience Reference - to and from dates, and the ship name"""
         dates = str(self.embark_date) + ' - ' + str(self.disembark_date) + ', '
         return dates + self.vessel_name
-
-'''
-An intermediate model seemed like a good idea initially, but it might be worth
-just working through a m2m relationship - since there isn't a lot of extra data
-to assemble. Will need to think on this.
-
-Note that this will also require an addition to either Vacancy or Person
-(probably Vacancy though) to complete the transition. See docs for more:
-eg: class Vacancy(models.Model):
-        ...
-        applications = ManyToManyField(Person, through='Application')
-
-class Application(models.Model):
-    person = models.ForeignKey(Person)
-    vacancy = models.ForeignKey(Vacancy)
-    date_applied = models.DateField()
-'''
