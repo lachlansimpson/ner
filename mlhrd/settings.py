@@ -177,9 +177,18 @@ LOGGING = {
 DATE_FORMAT=('j N, Y')
 DATE_INPUT_FORMATS=('%d %B %Y')
 
+HAYSTACK_SITECONF = 'mlhrd.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
+
+'''
+
+This is for Haystack 2.0, we have haystack 1.2.7
+
 HAYSTACK_CONNECTIONS = {
 	'default': {
 		'ENGINE':'haystack.backends.solr_backend.SolrEngine',
 		'URL': 'http://127.0.0.1:8983/solr'
 		},
 }
+'''

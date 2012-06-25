@@ -1,0 +1,4 @@
+{{ object }}
+{{ object.labour_id }}
+{{ object.dob }}
+
