@@ -4,13 +4,13 @@
 Person detail page of the portal.
 
 {% endcomment %}
-{% block coltype %}colMS{% endblock %}
+
 {% block title %}
 Person detail
 {% endblock %}
 
 {% block content %}
-{{ block.super }}
+<div id="content-left">
     <section>
     <h3>Main details</h3>
     <strong>Name:</strong> {{ person }} <br />
@@ -85,6 +85,8 @@ Person detail
         {% endif %}
 
         </section>
+    </div>
+    <div id="content-right"> 
         {% if person.experiences %}
         <h3>Work Experience</h3>
         {% for xp in person.experiences.all %}
@@ -116,4 +118,5 @@ Person detail
         <section>
         <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
         </section>
+    </div>
     {% endblock %}
