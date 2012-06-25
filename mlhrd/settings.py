@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.comments',
     'south',
+    'haystack',
     'ner',
 )
 
@@ -175,3 +176,10 @@ LOGGING = {
 ## Added by Lachlan
 DATE_FORMAT=('j N, Y')
 DATE_INPUT_FORMATS=('%d %B %Y')
+
+HAYSTACK_CONNECTIONS = {
+	'default': {
+		'ENGINE':'haystack.backends.solr_backend.SolrEngine',
+		'URL': 'http://127.0.0.1:8983/solr'
+		},
+}
