@@ -1,10 +1,10 @@
-# Django settings for mlhrd project.
+# settings.py Django settings for mlhrd project.
+# for settings that are not environment dependent
 import sys
 import os
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -12,17 +12,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mlhrd',                      # Or path to database file if using sqlite3.
-        'USER': 'mlhrduser',                      # Not used with sqlite3.
-        'PASSWORD': 'mlhrdtvetssp',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -50,14 +39,8 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-# Hack to get the admin media
-#ADMIN_MEDIA_ROOT = '/home/datakid/src/k/mlhrd/ner/admin-media/'
-#ADMIN_MEDIA_ROOT='/envs/mlhrd/lib/python2.7/site-packages/django/contrib/admin/static/'
-#ADMIN_MEDIA_PREFIX = 'http://127.0.0.1:8000/admin-media/'
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-#MEDIA_ROOT = '/home/datakid/src/k/mlhrd/ner/media/'
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -140,7 +123,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.comments',
     'south',
-    'haystack',
     'ner',
 )
 
@@ -177,18 +159,9 @@ LOGGING = {
 DATE_FORMAT=('j N, Y')
 DATE_INPUT_FORMATS=('%d %B %Y')
 
-HAYSTACK_SITECONF = 'mlhrd.search_sites'
-HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
+try:
+    from local_settings import *
+except ImportError:
+    pass
 
-'''
 
-This is for Haystack 2.0, we have haystack 1.2.7
-
-HAYSTACK_CONNECTIONS = {
-	'default': {
-		'ENGINE':'haystack.backends.solr_backend.SolrEngine',
-		'URL': 'http://127.0.0.1:8983/solr'
-		},
-}
-'''
