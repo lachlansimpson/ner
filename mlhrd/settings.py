@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'mlhrd',                      # Or path to database file if using sqlite3.
+        'NAME': 'mlhrddev',                      # Or path to database file if using sqlite3.
         'USER': 'mlhrduser',                      # Not used with sqlite3.
         'PASSWORD': 'mlhrdtvetssp',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
