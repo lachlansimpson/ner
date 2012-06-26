@@ -14,9 +14,9 @@ urlpatterns = patterns('ner.views',
 
         url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
         
-        url(r'^person/(?P<pk>\d+)/$',
-            DetailView.as_view(
-                model=Person)),
+        #url(r'^person/(?P<pk>\d+)/$',
+         #   DetailView.as_view(model=Person),name='person_view'),
+        url(r'^person/(\d+)/$', DetailView.as_view(model=Person), name='person_view'),
 
         url(r'^person/add/$',
             CreateView.as_view(

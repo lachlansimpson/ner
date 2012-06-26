@@ -23,9 +23,6 @@ and vacanacies can be "open" or "closed"
 Anything closed in the last 30 days is 'recently closed'.
 """
 today = datetime.date.today()
-#year = datetime.date.today().year
-#day = datetime.date.today().day
-#month = datetime.date.today().month
 year = today.year
 month = today.month
 day = today.day
@@ -222,6 +219,10 @@ class Person(models.Model):
         last = Person.objects.order_by('-id')[0]
         self.labour_id = last.pk + 100001 #100000 for aesthetics, 1 for increment
         super(Person, self).save(*args, **kwargs) # Call the "real" save() method.
+    
+    @models.permalink	
+    def get_absolute_url(self):
+	return ('person_view', [str(self.labour_id)])
 
 class FTCQualification(models.Model):
     class Meta:

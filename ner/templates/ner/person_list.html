@@ -22,7 +22,8 @@ List of people available
     <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
     <ul>
         {% for person in letter.list %}
-            <li><a href="/ner/person/{{ person.id }}/">{{ person }}</a></li>
+            {% comment %}<li><a href="/ner/person/{{ person.id }}/">{{ person }}</a></li>{% endcomment %}
+            <li><a href="/ner/person/{{ person.get_absolute_url }}/">{{ person }}</a></li>
         {% endfor %}
     </ul>
     </li>
