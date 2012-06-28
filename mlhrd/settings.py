@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'south',
     'ner',
+    'haystack',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -157,6 +158,10 @@ LOGGING = {
 ## Added by Lachlan
 DATE_FORMAT=('j N, Y')
 DATE_INPUT_FORMATS=('%d %B %Y')
+
+HAYSTACK_SITECONF = 'mlhrd.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8983/solr'
 
 try:
     from mlhrd.local_settings import *
