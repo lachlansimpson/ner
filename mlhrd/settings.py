@@ -5,7 +5,6 @@ import os
 
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
      ('Lachlan Musiman', 'datakid@gmail.com'),
@@ -160,8 +159,6 @@ DATE_FORMAT=('j N, Y')
 DATE_INPUT_FORMATS=('%d %B %Y')
 
 try:
-    from local_settings import *
+    from mlhrd.local_settings import *
 except ImportError:
     pass
-
-
