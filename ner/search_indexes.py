@@ -12,7 +12,6 @@ class PersonIndex(SearchIndex):
 	text = CharField(document=True, use_template=True)
 	surname = CharField(model_attr='surname')
 	first_name = CharField(model_attr='first_name')
-	labour_id = IntegerField(model_attr='labour_id')
 	
 	def get_model(self):
 		return Person
