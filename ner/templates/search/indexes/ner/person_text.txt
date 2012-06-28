@@ -1,4 +1,4 @@
 {{ object }}
-{{ object.labour_id }}
+{{ object.get_id }}
 {{ object.dob }}
 

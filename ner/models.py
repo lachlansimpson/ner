@@ -220,7 +220,9 @@ class Person(models.Model):
         ensure uniqueness and incrementability. The field is otherwise
         uneditable for data integrity
         """
-        self.slug = slugify(self.get_id())
+        if not self.id:
+            super(Person, self).save() # Call the "real" save() method.
+            self.slug = slugify(self.get_id())
         super(Person, self).save() # Call the "real" save() method.
     
     @models.permalink	

@@ -67,10 +67,9 @@ class PersonAdminForm(ModelForm):
 
 class PersonAdmin(admin.ModelAdmin):
     filter_horizontal = ("skills",)
-    readonly_fields = ('labour_id',)
     fieldsets = [
         ('Biographical', {'fields':[('first_name', 'surname'), 
-                                    ('dob', 'gender', 'labour_id')]}),
+                                    ('dob', 'gender')]}),
         ('Contact Information', {'fields':[('email', 'phone_mobile'), 
                                            ('phone_home', 'phone_other')],
                                             'classes':['collapse']}),
