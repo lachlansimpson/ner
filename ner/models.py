@@ -15,6 +15,7 @@ Salary levels
 """
 
 from django.db import models
+from django.template.defaultfilters import slugify
 import datetime
 
 """
@@ -198,7 +199,7 @@ class Person(models.Model):
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
     skills = models.ManyToManyField(Requirement, blank='True', null='True')
-    labour_id = models.IntegerField('Worker ID#', editable='False')
+    slug = models.SlugField(editable=False)
 
     people = models.Manager()
     workers = WorkManager()
@@ -211,18 +212,20 @@ class Person(models.Model):
     def first_letter(self):
         return self.surname and self.surname[0] or ''
 
-    def save(self, *args, **kwargs):
-        """ This adds the labour id - based on the personal key of the table to
+    def get_id(self):
+	return self.pk + 100000
+
+    def save(self):
+        """ This adds the labour id - based on the primary key of the table to
         ensure uniqueness and incrementability. The field is otherwise
         uneditable for data integrity
         """
-        last = Person.objects.order_by('-id')[0]
-        self.labour_id = last.pk + 100001 #100000 for aesthetics, 1 for increment
-        super(Person, self).save(*args, **kwargs) # Call the "real" save() method.
+        self.slug = slugify(self.get_id())
+        super(Person, self).save() # Call the "real" save() method.
     
     @models.permalink	
     def get_absolute_url(self):
-	return ('person_view', [str(self.labour_id)])
+	return ('person_view', [str(self.slug)])
 
 class FTCQualification(models.Model):
     class Meta:
@@ -263,6 +266,11 @@ class Organisation(models.Model):
             return self.name + ', ' + self.get_island_display()
         else:
             return self.name + ', all islands'
+
+    def save(self):
+	if not self.id:
+	  self.slug = slugify(self.name)
+	super(Organisation, self).save()	
 
 class OpenVacancyManager(models.Manager):
     def get_query_set(self):

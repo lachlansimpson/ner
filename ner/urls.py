@@ -16,7 +16,7 @@ urlpatterns = patterns('ner.views',
         
         #url(r'^person/(?P<pk>\d+)/$',
          #   DetailView.as_view(model=Person),name='person_view'),
-        url(r'^person/(\d+)/$', DetailView.as_view(model=Person), name='person_view'),
+        url(r'^person/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Person), name='person_view'),
 
         url(r'^person/add/$',
             CreateView.as_view(
