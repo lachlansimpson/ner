@@ -68,7 +68,7 @@ urlpatterns = patterns('ner.views',
             ListView.as_view(
                 queryset=Vacancy.complete.all())),
         
-        url(r'^vacancy/(?P<slug>[-\w]+)/$',
+        url(r'^vacancy/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$',
             DetailView.as_view(
                 model=Vacancy),
             name='vacancy_view'),

@@ -19,7 +19,7 @@ Requirement list
             <ul>
             {% for actual_req in req.list %}
                 {% for job in actual_req.vacancy_set.all %}
-                <li><a href="/ner/vacancy/{{ job.id }}/">{{ job }}</a></li>
+                <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
                 {% endfor %}
             {% endfor %}
             </ul>    

@@ -290,7 +290,7 @@ class Vacancy(models.Model):
     class Meta:
         verbose_name_plural = "Vacancies"
     
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique_for_date='closing_date')
     occupation_code = models.CharField(max_length=4,choices=ISCO_CODES)
     organisation = models.ForeignKey('Organisation')
     division = models.CharField("Division within Organisation",max_length=30,
@@ -322,12 +322,16 @@ class Vacancy(models.Model):
     
     def save(self):
 	if not self.id:
-	    self.slug = slugify(self.name)
+	    self.slug = slugify(self.title)
 	super(Vacancy, self).save()	
-    
+
     @models.permalink	
     def get_absolute_url(self):
-	return ('vacancy_view', [str(self.slug)])
+	return ('vacancy_view', (), {
+            'year': self.closing_date.year,
+            'month': self.closing_date.month,
+            'day': self.closing_date.day,
+            'slug': self.slug})
 
 class Experience(models.Model):
     class Meta:
