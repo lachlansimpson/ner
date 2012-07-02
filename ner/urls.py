@@ -14,8 +14,6 @@ urlpatterns = patterns('ner.views',
 
         url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
         
-        #url(r'^person/(?P<pk>\d+)/$',
-         #   DetailView.as_view(model=Person),name='person_view'),
         url(r'^person/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Person), name='person_view'),
 
         url(r'^person/add/$',
@@ -45,7 +43,8 @@ urlpatterns = patterns('ner.views',
         url(r'^organisation/(?P<slug>[-\w]+)/$',
             DetailView.as_view(
                 model=Organisation,
-                template_name='ner/organisation_detail.html')),
+                template_name='ner/organisation_detail.html'),
+                name='organisation_view'),
 
         url(r'^organisation/(?P<pk>\d+)/$',
             DetailView.as_view(

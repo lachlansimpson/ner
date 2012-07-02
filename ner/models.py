@@ -273,6 +273,10 @@ class Organisation(models.Model):
 	if not self.id:
 	  self.slug = slugify(self.name)
 	super(Organisation, self).save()	
+    
+    @models.permalink	
+    def get_absolute_url(self):
+	return ('organisation_view', [str(self.slug)])
 
 class OpenVacancyManager(models.Manager):
     def get_query_set(self):
@@ -305,6 +309,7 @@ class Vacancy(models.Model):
 
     closing_date = models.DateField()
     requirements = models.ManyToManyField(Requirement)
+    slug = models.SlugField(max_length=50)
     applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='jobs', 
                                         blank='True', null='True')
     complete = models.Manager()

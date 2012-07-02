@@ -18,7 +18,7 @@ Organisation list
         <li>{{ industry.grouper }}
         <ul>
             {% for org in industry.list %} 
-                <li><a href="/ner/organisation/{{ org.slug }}/">{{ org.name }}</a></li>
+                <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
             {% endfor %}
         </ul>
         </li>
