@@ -292,7 +292,7 @@ class Vacancy(models.Model):
     
     title = models.CharField(max_length=50, unique_for_date='closing_date')
     occupation_code = models.CharField(max_length=4,choices=ISCO_CODES)
-    organisation = models.ForeignKey('Organisation')
+    organisation = models.ForeignKey('Organisation', related_name='jobs_at')
     division = models.CharField("Division within Organisation",max_length=30,
                                 blank='True')
     salary_level_1 = models.CharField("Salary minimum under the bar",
@@ -322,7 +322,8 @@ class Vacancy(models.Model):
     
     def save(self):
 	if not self.id:
-	    self.slug = slugify(self.title)
+            long_slug = slugify(self.title) + '-' + slugify(self.organisation)
+            self.slug = long_slug[:50]
 	super(Vacancy, self).save()	
 
     @models.permalink	

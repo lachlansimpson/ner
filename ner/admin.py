@@ -130,8 +130,7 @@ class VacancyAdmin(admin.ModelAdmin):
     filter_horizontal = ("requirements",)
     fieldsets = [
         ('Basic Details',
-         {'fields':[('title','closing_date'),'organisation','division'],
-          'classes':['collapse']}),
+         {'fields':[('title','closing_date'),'organisation','division']}),
         ('Salary details',
          {'fields':[('salary_level_1','salary_level_2'),('salary_level_3','salary_level_4')],
           'classes':['collapse']}),

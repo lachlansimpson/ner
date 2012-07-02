@@ -13,7 +13,7 @@ Vacancy details
     <section>
 
     <p><h4>Job Title:</h4> {{ vacancy.title }}</p>
-    <p><h4>Organisation:</h4> <a href="/ner/organisation/{{ vacancy.organisation.slug}}/">{{ vacancy.organisation }}</a></p>
+    <p><h4>Organisation:</h4> <a href="{{ vacancy.organisation.get_absolute_url }}">{{ vacancy.organisation }}</a></p>
     {% if vacancy.division %}
     <p><h4>Division:</h4> {{ vacancy.division }}</p>   
     {% endif %}
@@ -31,7 +31,7 @@ Vacancy details
     
     <p><h4>Applicants</h4></p>
     {% for applicant in vacancy.applicants.all %}
-    <li><a href="/ner/person/{{ applicant.id}}">{{ applicant }}</a></li>
+    <li><a href="{{ applicant.get_absolute_url }}">{{ applicant }}</a></li>
     {% endfor %}
 
     </section>

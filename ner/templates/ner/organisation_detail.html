@@ -32,8 +32,13 @@ Organisation detail
     {% if organisation.category %}<p><h4>
     Industry Category:</h4> {{ organisation.get_category_display }}
     </p> {% endif %}
-    
     </section>
+    <h3>Jobs Available</h3>
+    {% for job in organisation.jobs_at.all %}
+        <a href="{{ job.get_absolute_url }}">{{ job }}</a>
+    {% endfor %}
+    
+    
     <section>
     <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
     </section>
