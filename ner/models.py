@@ -260,7 +260,7 @@ class Organisation(models.Model):
     contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
-    slug = models.SlugField(max_length=40)
+    slug = models.SlugField(max_length=50)
 
     def __unicode__(self):
         """ Organisational reference"""
@@ -319,6 +319,15 @@ class Vacancy(models.Model):
     def __unicode__(self):
         """ Vacancy reference """
         return self.title + ' at ' + self.organisation.name
+    
+    def save(self):
+	if not self.id:
+	    self.slug = slugify(self.name)
+	super(Vacancy, self).save()	
+    
+    @models.permalink	
+    def get_absolute_url(self):
+	return ('vacancy_view', [str(self.slug)])
 
 class Experience(models.Model):
     class Meta:

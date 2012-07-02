@@ -68,9 +68,10 @@ urlpatterns = patterns('ner.views',
             ListView.as_view(
                 queryset=Vacancy.complete.all())),
         
-        url(r'^vacancy/(?P<pk>\d+)/$',
+        url(r'^vacancy/(?P<slug>[-\w]+)/$',
             DetailView.as_view(
-                model=Vacancy)),
+                model=Vacancy),
+            name='vacancy_view'),
 )
 
 urlpatterns += staticfiles_urlpatterns()
