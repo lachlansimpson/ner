@@ -109,7 +109,7 @@ Person detail
         <h3>Jobs Applied For</h3>
         {% for job in person.jobs.all %}
         <p>
-        <a href="{{ job }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}</em></a>
+        <a href="{{ job.get_absolute_url }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}</em></a>
         </p>
         {% endif %}
         {% endfor %}
