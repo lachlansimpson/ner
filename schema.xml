@@ -104,13 +104,19 @@
     <dynamicField name="*_dt" type="date"    indexed="true"  stored="true"/>
     
 
-    <field name="text" type="text" indexed="true" stored="true" multiValued="false" />
-
     <field name="first_name" type="text" indexed="true" stored="true" multiValued="false" />
 
     <field name="surname" type="text" indexed="true" stored="true" multiValued="false" />
 
-    <field name="labour_id" type="slong" indexed="true" stored="true" multiValued="false" />
+    <field name="name" type="text" indexed="true" stored="true" multiValued="false" />
+
+    <field name="title" type="text" indexed="true" stored="true" multiValued="false" />
+
+    <field name="closing_date" type="date" indexed="true" stored="true" multiValued="false" />
+
+    <field name="text" type="text" indexed="true" stored="true" multiValued="false" />
+
+    <field name="organisation" type="text" indexed="true" stored="true" multiValued="false" />
 
   </fields>
 

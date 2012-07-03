@@ -1,4 +1,5 @@
 {{ object }}
 {{ object.get_id }}
 {{ object.dob }}
-
+{{ object.surname }}
+{{ object.firstname }}

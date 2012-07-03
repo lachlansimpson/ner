@@ -15,3 +15,17 @@ environment (otherwise django throws an error, as it uses the wrong django):
 $ python manage.py schemamigration app --auto
 then
 $ python manage.py migrate app
+
+Haystack is installed:
+Once a change has been made to app/search_indexes.py, you need to build a new solr index.
+
+./manage.py build_solr_schema > schema.xml
+cp schema.xml /opt/solr/solr/conf/
+
+*restart solr* - I can't remember how I set it up (no screens running nothing in 
+        /etc or /etc/init.d or /etc/default...?!)
+
+Then:
+
+./manage.py rebuild_index
+

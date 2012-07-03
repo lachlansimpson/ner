@@ -19,6 +19,9 @@
             {% for result in page.object_list %}
                 <p>
                     <a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
+                {% if result.object.closing_date %}
+                    Closing date: {{ result.object.closing_date}}
+                {% endif %}
                 </p>
             {% empty %}
                 <p>No results found.</p>
