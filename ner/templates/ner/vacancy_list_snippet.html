@@ -1,0 +1,15 @@
+<h3>Open job vacancies</h3>
+{% if vacancy_list %}
+    {% regroup vacancy_list by closing_date as dated_list %}
+    {% for close_date in dated_list %}
+    <h3>{{ close_date.grouper }}  
+    <ul>
+        {% for job in close_date.list %}
+            <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+{% else %}
+    <p>No Vacancies are available.</p>
+{% endif %}
+
