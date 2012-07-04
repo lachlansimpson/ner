@@ -25,6 +25,11 @@ urlpatterns = patterns('ner.views',
             UpdateView.as_view(
                 model=Person)),
         
+        url(r'^orgs/$',
+            ListView.as_view(
+                queryset=Organisation.objects.all().order_by('name'),
+                template_name="ner/org_list.html")),
+        
         url(r'^orgs/islands/$',
             ListView.as_view(
                 queryset=Organisation.objects.all(),
@@ -45,10 +50,6 @@ urlpatterns = patterns('ner.views',
                 model=Organisation,
                 template_name='ner/organisation_detail.html'),
                 name='organisation_view'),
-
-        url(r'^organisation/(?P<pk>\d+)/$',
-            DetailView.as_view(
-                model=Organisation)),
 
         url(r'^vacancies/requirements/$',
             ListView.as_view(

@@ -11,15 +11,5 @@ Vacancy list
 {% block coltype %}colMS{% endblock %}
 {% block content %}
 {{ block.super }}
-<h3>Open job vacancies</h3>
-{% if vacancy_list %}
-    <ul>
-    {% for job in vacancy_list %}
-        <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No Vacancies are available.</p>
-    {% endif %}
-
+{% include 'ner/vacancy_list_snippet.html' %}
 {% endblock %}

@@ -6,3 +6,13 @@
 {% block branding %}{{ block.super }}
 <h1 id="site-name">{% trans 'National Employment Register' %}</h1>
 {% endblock %}
+
+{% block breadcrumbs %}
+    | <a href="/ner/">{% trans 'Home' %}</a> |
+    {% if title %} &rsaquo; {{ title }}{% endif %}
+    <a href="/ner/vacancies/">{% trans 'Vacancies' %}</a> |
+    <a href="/ner/people/">{% trans 'Workers' %}</a> |
+    <a href="/ner/orgs/">{% trans 'Organisations' %}</a> |
+    <a href="/search/">{% trans 'Search' %}</a> |
+    {{ block.super }}
+{% endblock %}

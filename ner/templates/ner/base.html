@@ -44,14 +44,15 @@
                 {% block nav-global %}{% endblock %}
             </div>
             <!-- END Header -->
-            {% block breadcrumbs %}
+
             <div class="breadcrumbs">
-                {% comment %} <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-                {% endcomment %}
-                <a href="/ner/">{% trans 'Home' %}</a>
-                {% if title %} &rsaquo; {{ title }}{% endif %}
+                {% block breadcrumbs %}     
+                {% if user.is_active and user.is_staff %}
+                <a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a>
+                {% endif %}
+                {% endblock %}
             </div>
-            {% endblock %}
+
             {% endif %}
 
             {% block messages %}

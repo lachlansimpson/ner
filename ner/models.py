@@ -277,6 +277,9 @@ class Organisation(models.Model):
     @models.permalink	
     def get_absolute_url(self):
 	return ('organisation_view', [str(self.slug)])
+    
+    def first_letter(self):
+        return self.name and self.name[0] or ''
 
 class OpenVacancyManager(models.Manager):
     def get_query_set(self):
