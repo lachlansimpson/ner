@@ -2,9 +2,8 @@
 {% comment %}
 
 Person detail page of the portal.
-
 {% endcomment %}
-
+{% load comments %}
 {% block title %}
 Person detail
 {% endblock %}
@@ -114,7 +113,12 @@ Person detail
         {% endif %}
         {% endfor %}
         {% endif %}
-
+        <section>
+        {% render_comment_list for person %}
+        </section>
+        <section>
+        {% render_comment_form for person %}
+        </section>
         <section>
         <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
         </section>

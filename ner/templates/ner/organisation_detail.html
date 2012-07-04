@@ -2,6 +2,7 @@
 {% comment %}
 Organisation detail of the portal.
 {% endcomment %}
+{% load comments %}
 {% block title %}
 Organisation detail
 {% endblock %}
@@ -38,7 +39,12 @@ Organisation detail
         <a href="{{ job.get_absolute_url }}">{{ job }}</a>
     {% endfor %}
     
-    
+    <section>
+    {% render_comment_list for organsiation %}
+    </section>
+    <section>
+    {% render_comment_form for organsiation %}
+    </section>
     <section>
     <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
     </section>

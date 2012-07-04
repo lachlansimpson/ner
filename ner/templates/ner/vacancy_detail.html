@@ -4,7 +4,7 @@
 Vacancy detail page of the portal.
 
 {% endcomment %}
-
+{% load comments %}
 {% block title %}
 Vacancy details
 {% endblock %}
@@ -33,7 +33,12 @@ Vacancy details
     {% for applicant in vacancy.applicants.all %}
     <li><a href="{{ applicant.get_absolute_url }}">{{ applicant }}</a></li>
     {% endfor %}
-
+    </section>
+    <section>
+    {% render_comment_list for vacancy %}
+    </section>
+    <section>
+    {% render_comment_form for vacancy %}
     </section>
     <section>
         <p><a href="/admin/ner/vacancy/{{ vacancy.id }}/">Edit this Vacancy</a></p>
