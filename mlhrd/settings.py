@@ -121,9 +121,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.comments',
-    'south',
     'ner',
     'haystack',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
