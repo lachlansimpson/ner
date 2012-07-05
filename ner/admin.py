@@ -94,7 +94,7 @@ class PersonAdmin(admin.ModelAdmin):
 class OrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     fieldsets = [
-        ('', {'fields':[('name', 'island'), 'address']}),
+       ('', {'fields':[('name', 'island'), ('acronym','address')]}),
         ('Contact details',
          {'fields':[('contact_name','contact_email'),('contact_phone_1','contact_phone_2')],
           'classes':['collapse']}),
