@@ -10,7 +10,10 @@ Organisation detail
 {% block content %}
     <section>
     
-    <p><h4>Name:</h4> {{ organisation.name }}</p>
+    <p><h4>Name:</h4> {{ organisation.name }}
+    {% if organisation.acronym %}
+        ({{ organisation.acronym }})
+    {% endif %}
     {% if organisation.island %}<p><h4>
         Island:</h4> {{ organisation.get_island_display }}
     </p> {% endif %}
