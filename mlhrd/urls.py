@@ -19,5 +19,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),                       
     url(r'^ner/', include('ner.urls')),
     url(r'^search/$',include('haystack.urls')),
-    url(r'^comments/$',include('django.contrib.comments.urls')),
+    url(r'^comments/',include('django.contrib.comments.urls')),
 )
