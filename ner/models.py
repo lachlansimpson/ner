@@ -260,6 +260,7 @@ class Organisation(models.Model):
     contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
+    acronym = models.CharField(max_length=10, blank='True', null='True')
     slug = models.SlugField(max_length=50)
 
     def __unicode__(self):
@@ -271,7 +272,10 @@ class Organisation(models.Model):
 
     def save(self):
 	if not self.id:
-	  self.slug = slugify(self.name)
+            if self.acronym:
+                self.slug = slugify(self.acronym)
+            else:
+	        self.slug = slugify(self.name)
 	super(Organisation, self).save()	
     
     @models.permalink	
