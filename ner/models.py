@@ -271,11 +271,10 @@ class Organisation(models.Model):
             return self.name + ', all islands'
 
     def save(self):
-	if not self.id:
-            if self.acronym:
-                self.slug = slugify(self.acronym)
-            else:
-	        self.slug = slugify(self.name)
+	if self.acronym:
+	    self.slug = slugify(self.acronym)
+	else:
+	    self.slug = slugify(self.name)
 	super(Organisation, self).save()	
     
     @models.permalink	
