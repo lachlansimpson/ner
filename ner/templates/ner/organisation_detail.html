@@ -10,7 +10,10 @@ Organisation detail
 {% block content %}
     <section>
     
-    <p><h4>Name:</h4> {{ organisation.name }}</p>
+    <p><h4>Name:</h4> {{ organisation.name }}
+    {% if organisation.acronym %}
+        ({{ organisation.acronym }})
+    {% endif %}
     {% if organisation.island %}<p><h4>
         Island:</h4> {{ organisation.get_island_display }}
     </p> {% endif %}
@@ -40,10 +43,10 @@ Organisation detail
     {% endfor %}
     
     <section>
-    {% render_comment_list for organsiation %}
+    {% render_comment_list for organisation %}
     </section>
     <section>
-    {% render_comment_form for organsiation %}
+    {% render_comment_form for organisation %}
     </section>
     <section>
     <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
