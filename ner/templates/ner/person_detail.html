@@ -11,7 +11,7 @@ Person detail
 {% block content %}
 <div id="content-left">
     <section>
-    <h3>Main details</h3>
+    <h3>Main details</h3><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a><br />
     <strong>Name:</strong> {{ person }} <br />
     <strong>ID Number:</strong> {{ person.get_id }}<br /> 
     <strong>Date of Birth:</strong> {{ person.dob }} <br />
@@ -113,13 +113,12 @@ Person detail
         {% endfor %}
         {% endif %}
         <section>
+	<h3>Comments</h3>
         {% render_comment_list for person %}
         </section>
         <section>
+	<h4>Add comment</h4>
         {% render_comment_form for person %}
-        </section>
-        <section>
-        <p><a href="/admin/ner/person/{{ person.id }}/">Edit this person</a></p>
         </section>
     </div>
     {% endblock %}
