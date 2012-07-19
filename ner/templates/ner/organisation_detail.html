@@ -41,7 +41,8 @@ Organisation detail
     {% for job in organisation.jobs_at.all %}
         <a href="{{ job.get_absolute_url }}">{{ job }}</a>
     {% endfor %}
-    
+   
+    <h4>Comments</h4>
     <section>
     {% render_comment_list for organisation %}
     </section>
