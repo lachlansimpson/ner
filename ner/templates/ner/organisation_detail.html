@@ -8,8 +8,8 @@ Organisation detail
 {% endblock %}
 
 {% block content %}
+    <div id="content-left">
     <section>
-    
     <p><h4>Name:</h4> {{ organisation.name }}
     {% if organisation.acronym %}
         ({{ organisation.acronym }})
@@ -37,11 +37,14 @@ Organisation detail
     Industry Category:</h4> {{ organisation.get_category_display }}
     </p> {% endif %}
     </section>
+    </div>
+    <div id="content-right">
     <h3>Jobs Available</h3>
     {% for job in organisation.jobs_at.all %}
         <a href="{{ job.get_absolute_url }}">{{ job }}</a>
     {% endfor %}
-    
+   
+    <h4>Comments</h4>
     <section>
     {% render_comment_list for organisation %}
     </section>
@@ -51,5 +54,5 @@ Organisation detail
     <section>
     <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
     </section>
-
+    </div>
 {% endblock %}
