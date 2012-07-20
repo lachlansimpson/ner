@@ -44,11 +44,11 @@ Organisation detail
         <a href="{{ job.get_absolute_url }}">{{ job }}</a>
     {% endfor %}
    
-    <h4>Comments</h4>
-    <section>
+    <section> 
+    <h3>Comments</h3>
     {% render_comment_list for organisation %}
-    </section>
-    <section>
+    
+    <h4>Add a comment</h4>
     {% render_comment_form for organisation %}
     </section>
     <section>
