@@ -7,6 +7,7 @@ from django.contrib import admin
 from django.forms import ModelForm, ValidationError
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
 from django.forms.extras.widgets import SelectDateWidget 
+from ner.action import export_as_csv
 import datetime
 
 this_year = datetime.date.today().year
@@ -148,3 +149,4 @@ admin.site.register(Person, PersonAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(Requirement)
+admin.site.add_action(export_as_csv, 'export_selected')
