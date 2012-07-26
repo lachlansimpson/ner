@@ -7,10 +7,11 @@ Has classes for:
     Certificate : for an individuals schooling history
     FTCQualification: for an individuals FTC history
     Organisation: for Organisations
+    Comnpensation: for compensation claims by an individual
 
 There are choices defined for: Islands, yes/no, gender(M/F), marital status
-(S/M), Industry codes via ILO (ISIC), Occupation codes via ILO (ISOC), and
-Salary levels
+(S/M), Industry codes via ILO (ISIC), Occupation codes via ILO (ISOC), Salary
+levels and Compensation statuses
 
 """
 
@@ -141,6 +142,18 @@ ISCO_CODES = (
     ('7','Craft and related trades workers'),
     ('8','Plant and machine operators, and assemblers'),
     ('9','Elementary occupations'),
+)
+
+COMPENSATION_CHOICES = (
+    ('0','Paid'),
+    ('1','Rejected'),
+    ('2','Pending'),
+    ('3','Processing'),
+)
+
+EMPLOYMENT_STATUS = (
+    ('0','Permanent'),
+    ('1','Temporary'),
 )
 
 class Requirement(models.Model):
@@ -373,3 +386,43 @@ class ShipExperience(models.Model):
         """Ship Experience Reference - to and from dates, and the ship name"""
         dates = str(self.embark_date) + ' - ' + str(self.disembark_date) + ', '
         return dates + self.vessel_name
+
+class Compensation(models.Model):
+    reference_number = models.CharField(max_length=10)   
+    injured_person = models.ForeignKey('Person',related_name='injured_party')
+    organisation = models.ForeignKey('Organisation',related_name='injured_partys_employer')
+    job_performed = models.CharField(max_length=30)
+    employment_status = models.CharField(max_length=2,choices=EMPLOYMENT_STATUS,blank='TRUE',null='TRUE')
+    org_department = models.CharField(max_length=40)
+
+    location_of_accident = models.CharField(max_length=100)
+    date_of_accident = models.DateField()
+    date_accident_reported = models.DateField()
+    date_of_claim = models.DateField() # make this uneditable, set at save
+    
+    claimant = models.ForeignKey('Person',blank='TRUE',null='TRUE') #if blank, claimant is affected party
+    relationship_to_injured_party = models.CharField(max_length=30)
+
+    witness_1 = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='witness_1')
+    witness_1_relationship = models.CharField(max_length=30)
+    witness_2 = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='witness_2')
+    witness_2_relationship = models.CharField(max_length=30)
+
+    doctors_name = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='doctor')
+    hospital = models.ForeignKey('Organisation',blank='TRUE',null='TRUE',related_name='hospital')
+    cause_of_injury = models.TextField(max_length=200)
+    doctors_remarks = models.TextField(max_length=200)
+    
+    claim_status = models.CharField(max_length=2,choices=COMPENSATION_CHOICES,blank='True')
+    amount_paid = models.IntegerField()
+    payment_voucher_number = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=20)
+
+    @models.permalink	
+    def get_absolute_url(self):
+	return ('compensation_claim_view', [str(self.slug)])
+    
+    def save(self):
+        self.slug = slugify(self.person.get_id() + ' - ' + self.reference_number)
+        super(Compensation, self).save() # Call the "real" save() method.
+
