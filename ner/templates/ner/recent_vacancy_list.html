@@ -15,7 +15,7 @@ Vacancy list
 {% if vacancy_list %}
     <ul>
     {% for job in vacancy_list %}
-        <li><a href="{{ job.get_absolute_url }}/">{{ job }}</a></li>
+        <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

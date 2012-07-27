@@ -341,8 +341,8 @@ class Vacancy(models.Model):
     
     def save(self):
 	if not self.id:
-            long_slug = slugify(self.title) + '-' + slugify(self.organisation)
-            self.slug = long_slug[:50]
+          long_slug = slugify(self.title + '-' + str(self.organisation))
+          self.slug = long_slug[:50]
 	super(Vacancy, self).save()	
 
     @models.permalink	
@@ -428,10 +428,12 @@ class Compensation(models.Model):
 	return ('compensation_claim_view', [str(self.slug)])
     
     def save(self):
+     #   if not self.id:
+    #        self.reference = 
         if not self.claimant:
             self.claimant = self.injured_person
             self.relationship_to_injured_party = 'self'
-        self.slug = slugify(str(self.injured_person.get_id()) + ' - ' + self.reference_number)
+        self.slug = slugify(str(self.injured_person.get_id() + ' - ' + self.reference_number))
         super(Compensation, self).save() # Call the "real" save() method.
         
     def __unicode__(self):
