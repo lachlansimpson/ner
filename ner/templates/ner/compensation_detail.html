@@ -10,13 +10,10 @@ Compensation details
 {% endblock %}
 
 {% block content %}
-  <div id="content-left">
-  <section>
-  <p><h4>Injured Party:</h4><a href="{{ compensation.injured_person.get_absolute_url }}">{{ compensation.injured_person }}</a></p>
-  <p><h4>Injury Occured On:</h4>{{ compensation.date_of_accident }} 
-     <h4>Injury Reported On:</h4>{{ compensation.date_accident_reported }}  
-     <h4>Injury Claim Made On:</h4> {{ compensation.date_of_claim }}</p>
-     <p><h4>Organisation:</h4> <a href="{{ compensation.organisation.get_absolute_url }}">{{ compensation.organisation }}</a></p>
+<div id="content-left">
+    <section>
+    <p><h4>Injured Party:</h4><a href="{{ compensation.injured_person.get_absolute_url }}">{{ compensation.injured_person }}</a></p>
+    <p><h4>Organisation:</h4> <a href="{{ compensation.organisation.get_absolute_url }}">{{ compensation.organisation }}</a></p>
     {% if compensation.org_department %} 
     <p><h4>Division:</h4> {{ compensation.org_department }}</p>   
     {% endif %}
@@ -27,7 +24,7 @@ Compensation details
     <h4>Relationship with Injured Party</h4> {{ compensation.relationship_to_injured_party }}
     <h4>Witnesses:</h4>
     {% for witness in compensation.witnesses.all %}
-        <li><a href="{{ witness.person.get_absolute_url }}">{{ witness }}</a></li>
+    <li><a href="{{ witness.person.get_absolute_url }}">{{ witness }}</a></li>
     {% endfor %}
 
     <h4>Doctor:</h4> <a href="{{ compensation.doctors_name.get_absolute_url }}">{{ compensation.doctors_name }}</a>
@@ -35,24 +32,28 @@ Compensation details
     <h4>Cause of Injury:</h4> {{ compensation.cause_of_injury }}
     <h4>Doctor's Remarks:</h4> {{ compensation.doctors_remarks }}
 
+
+    </section>
+</div>  
+<div id="content-left">
+    <h4>Claim reference number:</h4> {{ compensation.get_reference_number }}   
     <h4>Claim Status:</h4> {{ compensation.get_claim_status_display }}
     <h4>Amount Paid:</h4> {{ compensation.amount_paid }}
     <h4>Payment Voucher:</h4> {{ compensation.payment_voucher }}
+    <p><h4>Injury Occured On:</h4>{{ compensation.date_of_accident }} 
+    <h4>Injury Reported On:</h4>{{ compensation.date_accident_reported }}  
+    <h4>Injury Claim Made On:</h4> {{ compensation.date_of_claim }}</p>
+    <section>
+    <h3>Comments</h3>
 
-</div>
-    
-   </section>
-   <section>
-   <h3>Comments</h3>
-   
     {% render_comment_list for compensation %}
-    
+
     <h4>Add a comment</h4>
     {% render_comment_form for compensation %}
     </section>
     <section>
-        <p><a href="/admin/ner/compensation/{{ compensation.id }}/">Edit this Compensation</a></p>
+    <p><a href="/admin/ner/compensation/{{ compensation.id }}/">Edit this Compensation</a></p>
     </section>
-    </div>
+</div>
 
 {% endblock %}
