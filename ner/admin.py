@@ -158,7 +158,7 @@ class CompensationAdmin(admin.ModelAdmin):
     filter_horizontal = ('witnesses',)
     fieldsets = [
         ('Injured Party and Claim Details',
-         {'fields':[('injured_person','reference_number'),
+         {'fields':[('injured_person'),
                     ('date_of_accident','date_accident_reported','date_of_claim')
                     ,'location_of_accident',('claimant','relationship_to_injured_party')]}),
         ('Medical Report Details',

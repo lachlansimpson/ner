@@ -77,6 +77,12 @@ urlpatterns = patterns('ner.views',
         url(r'^compensation/all/$',
             ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
                              template_name="ner/all_compensation_list.html")),
+        
+        url(r'^compensation/(?P<slug>[-\w]+)/$',
+            DetailView.as_view(
+                model=Compensation,
+                template_name='ner/compensation_detail.html'),
+                name='compensation_claim_view'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

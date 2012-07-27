@@ -395,12 +395,11 @@ class Witness(models.Model):
         return str(self.person)
 
 class Compensation(models.Model):
-    reference_number = models.CharField(max_length=10)   
     injured_person = models.ForeignKey('Person',related_name='injured_party')
     organisation = models.ForeignKey('Organisation',related_name='injured_partys_employer')
     job_performed = models.CharField('Job Title',max_length=30)
     employment_status = models.CharField(max_length=2,choices=EMPLOYMENT_STATUS,blank='TRUE',null='TRUE')
-    org_department = models.CharField(max_length=40)
+    org_department = models.CharField(max_length=40,blank='TRUE',null='TRUE')
 
     location_of_accident = models.CharField(max_length=100)
     date_of_accident = models.DateField()
@@ -423,19 +422,22 @@ class Compensation(models.Model):
     payment_voucher_number = models.CharField(max_length=20,blank='TRUE',null='TRUE')
     slug = models.SlugField(max_length=20)
 
+    def get_reference_number(self):
+        return self.pk + 10000
+    
     @models.permalink	
     def get_absolute_url(self):
 	return ('compensation_claim_view', [str(self.slug)])
     
     def save(self):
-     #   if not self.id:
-    #        self.reference = 
         if not self.claimant:
             self.claimant = self.injured_person
             self.relationship_to_injured_party = 'self'
-        self.slug = slugify(str(self.injured_person.get_id() + ' - ' + self.reference_number))
+        if not self.id:
+            super(Compensation, self).save() # Call the "real" save() method.
+        self.slug = slugify(str(self.injured_person.get_id()) + ' - ' + str(self.get_reference_number()))
         super(Compensation, self).save() # Call the "real" save() method.
         
     def __unicode__(self):
         """ return the claim number, injured party, organisation """
-        return self.reference_number + ', ' + str(self.injured_person) + ', ' + self.organisation.name
+        return str(self.get_reference_number()) + ', ' + str(self.injured_person) + ', ' + self.organisation.name
