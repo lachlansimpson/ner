@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
-from ner.models import Person, Organisation, Vacancy, Requirement
+from ner.models import Person, Organisation, Vacancy, Requirement, Compensation
 from ner.admin import PersonAdmin, CertInline, ExperienceInline, ShipXPInline, FTCQualInline
 import datetime
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -73,6 +73,10 @@ urlpatterns = patterns('ner.views',
             DetailView.as_view(
                 model=Vacancy),
             name='vacancy_view'),
+        
+        url(r'^compensation/all/$',
+            ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
+                             template_name="ner/all_compensation_list.html")),
 )
 
 urlpatterns += staticfiles_urlpatterns()

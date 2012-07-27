@@ -20,6 +20,12 @@ class ApplicantsInline(admin.StackedInline):
     verbose_name_plural='Jobs Applied For'
     template = 'admin/collapsed_tabular_inline.html'
 
+class WitnessInline(admin.StackedInline):
+    model = Witness
+    verbose_name='Witnessed'
+    verbose_name_plural='Witnesses'
+    template = 'admin/collapsed_tabular_inline.html'
+
 class CertInline(admin.TabularInline):
     model = Certificate
     template = 'admin/collapsed_tabular_inline.html'
@@ -56,6 +62,9 @@ class ExperienceInline(admin.TabularInline):
 class ShipXPInline(admin.TabularInline):
     model = ShipExperience
     template = 'admin/collapsed_tabular_inline.html'
+
+class WitnessAdmin(admin.ModelAdmin):
+    fields = ('person','relationship_to_injured_party')
 
 class PersonAdminForm(ModelForm):
     class Meta:
@@ -145,8 +154,28 @@ class VacancyAdmin(admin.ModelAdmin):
     list_filter = ('closing_date',)
     form = VacancyAdminForm
 
+class CompensationAdmin(admin.ModelAdmin):
+    filter_horizontal = ('witnesses',)
+    fieldsets = [
+        ('Injured Party and Claim Details',
+         {'fields':[('injured_person','reference_number'),
+                    ('date_of_accident','date_accident_reported','date_of_claim')
+                    ,'location_of_accident',('claimant','relationship_to_injured_party')]}),
+        ('Medical Report Details',
+         {'fields':[('doctors_name','hospital'),'cause_of_injury','doctors_remarks']}),
+        ('Witness Details',
+         {'fields':[('witnesses'), ]}),
+        ('Organisation Details',
+         {'fields':[('organisation', 'org_department'),
+                    ('job_performed', 'employment_status')]}),
+        ('Other Details',
+         {'fields':['claim_status',('payment_voucher_number','amount_paid') ]}),
+    ]
+
 admin.site.register(Person, PersonAdmin)
+admin.site.register(Witness, WitnessAdmin)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
+admin.site.register(Compensation, CompensationAdmin)
 admin.site.register(Requirement)
 admin.site.add_action(export_as_csv, 'export_selected')

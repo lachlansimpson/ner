@@ -387,11 +387,18 @@ class ShipExperience(models.Model):
         dates = str(self.embark_date) + ' - ' + str(self.disembark_date) + ', '
         return dates + self.vessel_name
 
+class Witness(models.Model):
+    person = models.ForeignKey('Person')
+    relationship_to_injured_party = models.CharField(max_length=30)
+    
+    def __unicode__(self):
+        return str(self.person)
+
 class Compensation(models.Model):
     reference_number = models.CharField(max_length=10)   
     injured_person = models.ForeignKey('Person',related_name='injured_party')
     organisation = models.ForeignKey('Organisation',related_name='injured_partys_employer')
-    job_performed = models.CharField(max_length=30)
+    job_performed = models.CharField('Job Title',max_length=30)
     employment_status = models.CharField(max_length=2,choices=EMPLOYMENT_STATUS,blank='TRUE',null='TRUE')
     org_department = models.CharField(max_length=40)
 
@@ -401,12 +408,10 @@ class Compensation(models.Model):
     date_of_claim = models.DateField() # make this uneditable, set at save
     
     claimant = models.ForeignKey('Person',blank='TRUE',null='TRUE') #if blank, claimant is affected party
-    relationship_to_injured_party = models.CharField(max_length=30)
+    relationship_to_injured_party = models.CharField(max_length=30,blank='TRUE',null='TRUE')
 
-    witness_1 = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='witness_1')
-    witness_1_relationship = models.CharField(max_length=30)
-    witness_2 = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='witness_2')
-    witness_2_relationship = models.CharField(max_length=30)
+    witnesses = models.ManyToManyField('Witness', verbose_name='list of witnesses', related_name='witnesses',
+                                          blank='True', null='True')
 
     doctors_name = models.ForeignKey('Person',blank='TRUE',null='TRUE',related_name='doctor')
     hospital = models.ForeignKey('Organisation',blank='TRUE',null='TRUE',related_name='hospital')
@@ -414,8 +419,8 @@ class Compensation(models.Model):
     doctors_remarks = models.TextField(max_length=200)
     
     claim_status = models.CharField(max_length=2,choices=COMPENSATION_CHOICES,blank='True')
-    amount_paid = models.IntegerField()
-    payment_voucher_number = models.CharField(max_length=20)
+    amount_paid = models.IntegerField(blank='TRUE',null='TRUE')
+    payment_voucher_number = models.CharField(max_length=20,blank='TRUE',null='TRUE')
     slug = models.SlugField(max_length=20)
 
     @models.permalink	
@@ -423,6 +428,12 @@ class Compensation(models.Model):
 	return ('compensation_claim_view', [str(self.slug)])
     
     def save(self):
-        self.slug = slugify(self.person.get_id() + ' - ' + self.reference_number)
+        if not self.claimant:
+            self.claimant = self.injured_person
+            self.relationship_to_injured_party = 'self'
+        self.slug = slugify(str(self.injured_person.get_id()) + ' - ' + self.reference_number)
         super(Compensation, self).save() # Call the "real" save() method.
-
+        
+    def __unicode__(self):
+        """ return the claim number, injured party, organisation """
+        return self.reference_number + ', ' + str(self.injured_person) + ', ' + self.organisation.name
