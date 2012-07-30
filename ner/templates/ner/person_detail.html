@@ -112,6 +112,14 @@ Person detail
         </p>
         {% endfor %}
         {% endif %}
+        
+        {% if person.injured_party %}
+        <h3>Compensation claims</h3>
+        {% for claim in person.injured_party.all %}
+        <p>
+        <a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
+        {% endfor %}
+        {% endif %}
         <section>
 	<h3>Comments</h3>
         {% render_comment_list for person %}

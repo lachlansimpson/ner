@@ -44,6 +44,15 @@ Organisation detail
         <a href="{{ job.get_absolute_url }}">{{ job }}</a>
     {% endfor %}
    
+    {% if organisation.injured_partys_employer %}
+    <h3>Compensation claims made against this organisation</h3>
+    {% for claim in organisation.injured_partys_employer.all %}
+    <p><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
+
+    {% endfor %}
+    {% endif %}
+
+
     <section> 
     <h3>Comments</h3>
     {% render_comment_list for organisation %}
