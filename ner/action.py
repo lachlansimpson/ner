@@ -1,3 +1,6 @@
+"""
+action.py - adds the "export as csv" option to the admin interface
+"""
 import csv
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
