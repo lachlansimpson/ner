@@ -1,0 +1,6 @@
+{{ object }}
+{{ object.get_reference_number }}
+{{ object.injured_person }}
+{{ object.organisation }}
+{{ object.date_of_accident }}
+{{ object.date_of_claim }}

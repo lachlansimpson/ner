@@ -37,7 +37,7 @@ class CompensationIndex(SearchIndex):
     date_of_claim = DateField(model_attr='date_of_claim')
     date_accident_reported = DateField(model_attr='date_accident_reported')
     date_of_accident = DateField(model_attr='date_of_accident')
-    injured_person = CharField(model_attr='Person')
+    injured_person = CharField(model_attr='injured_person')
 
     def get_model(self):
         return Compensation
