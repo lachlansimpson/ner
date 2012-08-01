@@ -76,19 +76,19 @@ urlpatterns = patterns('ner.views',
         
         url(r'^compensation/paid/$',
             ListView.as_view(queryset=Compensation.paid.all(),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/comp_paid.html")),
         
         url(r'^compensation/rejected/$',
             ListView.as_view(queryset=Compensation.rejected.all(),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/comp_rejected.html")),
         
         url(r'^compensation/pending/$',
             ListView.as_view(queryset=Compensation.pending.all(),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/comp_pending.html")),
         
         url(r'^compensation/processing/$',
             ListView.as_view(queryset=Compensation.processing.all(),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/comp_processing.html")),
         
         url(r'^compensation/all/$',
             ListView.as_view(queryset=Compensation.complete.all().order_by('date_of_claim'),
