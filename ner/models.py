@@ -395,6 +395,10 @@ class Witness(models.Model):
         return str(self.person)
 
 class Compensation(models.Model):
+    class Meta:
+        verbose_name = "Compensation Claim"
+        verbose_name_plural = "Compensation Claims"
+    
     injured_person = models.ForeignKey('Person',related_name='injured_party')
     organisation = models.ForeignKey('Organisation',related_name='injured_partys_employer')
     job_performed = models.CharField('Job Title',max_length=30)

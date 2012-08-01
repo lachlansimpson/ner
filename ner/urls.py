@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
-from ner.views import PersonDetailView, OrganisationDetailView
 from ner.models import Person, Organisation, Vacancy, Requirement, Compensation
 from ner.admin import PersonAdmin, CertInline, ExperienceInline, ShipXPInline, FTCQualInline
 import datetime
