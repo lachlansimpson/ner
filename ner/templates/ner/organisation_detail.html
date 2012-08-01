@@ -3,65 +3,71 @@
 Organisation detail of the portal.
 {% endcomment %}
 {% load comments %}
+
 {% block title %}
-Organisation detail
+    Organisation detail
 {% endblock %}
 
 {% block content %}
     <div id="content-left">
-    <section>
-    <p><h4>Name:</h4> {{ organisation.name }}
-    {% if organisation.acronym %}
-        ({{ organisation.acronym }})
-    {% endif %}
-    {% if organisation.island %}<p><h4>
-        Island:</h4> {{ organisation.get_island_display }}
-    </p> {% endif %}
-    <p><h4>Address:</h4> {{ organisation.address }}</p>
-    {% if organisation.contact_name %}<p><h4>
-    Contact Person:</h4> {{ organisation.contact_name }}
-    </p> {% endif %}
-    {% if organisation.phone_1 %}<p><h4>
-    Phone 1:</h4> {{  organisation.phone_1 }}
-    </p> {% endif %}
-    {% if organisation.phone_2 %}<p><h4>
-    Phone 2:</h4> {{  organisation.phone_2 }}
-    </p> {% endif %}
-    {% if organisation.email %}<p><h4>
-    Email:</h4> {{ organisation.email }}
-    </p> {% endif %}
-    {% if organisation.industry %}<p><h4>
-    Industry (ISIC) Code:</h4> {{ organisation.get_industry_display }}
-    </p> {% endif %}
-    {% if organisation.category %}<p><h4>
-    Industry Category:</h4> {{ organisation.get_category_display }}
-    </p> {% endif %}
-    </section>
-    </div>
-    <div id="content-right">
-    <h3>Jobs Available</h3>
-    {% for job in organisation.jobs_at.all %}
-        <a href="{{ job.get_absolute_url }}">{{ job }}</a>
-    {% endfor %}
-   
-    {% if organisation.injured_partys_employer %}
-    <h3>Compensation claims made against this organisation</h3>
-    {% for claim in organisation.injured_partys_employer.all %}
-    <p><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
-
-    {% endfor %}
-    {% endif %}
-
-
-    <section> 
-    <h3>Comments</h3>
-    {% render_comment_list for organisation %}
+        <section>
+            <p><h4>Name:</h4> {{ organisation.name }}
+            {% if organisation.acronym %}
+                ({{ organisation.acronym }})
+            {% endif %}
+            {% if organisation.island %}<p><h4>
+                Island:</h4> {{ organisation.get_island_display }}</p> 
+            {% endif %}
     
-    <h4>Add a comment</h4>
-    {% render_comment_form for organisation %}
-    </section>
-    <section>
-    <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
-    </section>
+            <p><h4>Address:</h4> {{ organisation.address }}</p>
+            
+            {% if organisation.contact_name %}<p><h4>
+            Contact Person:</h4> {{ organisation.contact_name }}
+            </p> {% endif %}
+            
+            {% if organisation.phone_1 %}<p><h4>
+            Phone 1:</h4> {{  organisation.phone_1 }}
+            </p> {% endif %}
+            {% if organisation.phone_2 %}<p><h4>
+            Phone 2:</h4> {{  organisation.phone_2 }}
+            </p> {% endif %}
+            {% if organisation.email %}<p><h4>
+            Email:</h4> {{ organisation.email }}
+            </p> {% endif %}
+            
+            {% if organisation.industry %}<p><h4>
+            Industry (ISIC) Code:</h4> {{ organisation.get_industry_display }}
+            </p> {% endif %}
+            {% if organisation.category %}<p><h4>
+            Industry Category:</h4> {{ organisation.get_category_display }}
+            </p> {% endif %}
+        </section>
+    </div>
+    
+    <div id="content-right">
+        <section>
+            {% if organisation.jobs_at.count != 0 %}    
+                <h3>Jobs Available</h3>
+                {% for job in organisation.jobs_at.all %}
+                    <a href="{{ job.get_absolute_url }}">{{ job }}</a>
+                {% endfor %}
+            {% endif %}
+        
+            {% if organisation.injured_partys_employer.count != 0 %}
+                <h3>Compensation claims made against this organisation</h3>
+                {% for claim in organisation.injured_partys_employer.all %}
+                    <p><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
+                {% endfor %}
+            {% endif %}
+
+            <h3>Comments</h3>
+            {% render_comment_list for organisation %}
+            <h4>Add a comment</h4>
+            {% render_comment_form for organisation %}
+            
+        </section>
+        <section>
+            <p><a href="/admin/ner/organisation/{{ organisation.id }}/">Edit this organisation</a></p>
+        </section>
     </div>
 {% endblock %}

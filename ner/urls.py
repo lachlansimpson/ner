@@ -74,6 +74,10 @@ urlpatterns = patterns('ner.views',
                 model=Vacancy),
             name='vacancy_view'),
         
+        url(r'^compensation/$',
+            ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
+                             template_name="ner/all_compensation_list.html")),
+        
         url(r'^compensation/all/$',
             ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
                              template_name="ner/all_compensation_list.html")),
