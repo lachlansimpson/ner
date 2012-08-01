@@ -137,7 +137,7 @@ class VacancyAdminForm(ModelForm):
         return cleaned_data
 
 class VacancyAdmin(admin.ModelAdmin):
-    filter_horizontal = ("requirements",)
+    filter_horizontal = ("requirements",'applicants')
     fieldsets = [
         ('Basic Details',
          {'fields':[('title','closing_date'),'organisation','division']}),

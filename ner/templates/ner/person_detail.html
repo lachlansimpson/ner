@@ -103,23 +103,24 @@ Person detail
         </p>
         {% endfor %}
         {% endif %}
-
-        {% if person.jobs %}
+        
+        {% if person.jobs.all.count != 0 %}
         <h3>Jobs Applied For</h3>
         {% for job in person.jobs.all %}
         <p>
         <a href="{{ job.get_absolute_url }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}{% endif %}</em></a>
         </p>
         {% endfor %}
-        {% endif %}
+      {% endif %} 
         
-        {% if person.injured_party %}
+        {% if person.compensation_set.count != 0  %}
+       
         <h3>Compensation claims</h3>
-        {% for claim in person.injured_party.all %}
+        {% for claim in person.compensation_set.all %}
         <p>
         <a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
         {% endfor %}
-        {% endif %}
+      {% endif %} 
         <section>
 	<h3>Comments</h3>
         {% render_comment_list for person %}
