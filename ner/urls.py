@@ -74,12 +74,28 @@ urlpatterns = patterns('ner.views',
                 model=Vacancy),
             name='vacancy_view'),
         
-        url(r'^compensation/$',
-            ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
+        url(r'^compensation/paid/$',
+            ListView.as_view(queryset=Compensation.paid.all(),
+                             template_name="ner/all_compensation_list.html")),
+        
+        url(r'^compensation/rejected/$',
+            ListView.as_view(queryset=Compensation.rejected.all(),
+                             template_name="ner/all_compensation_list.html")),
+        
+        url(r'^compensation/pending/$',
+            ListView.as_view(queryset=Compensation.pending.all(),
+                             template_name="ner/all_compensation_list.html")),
+        
+        url(r'^compensation/processing/$',
+            ListView.as_view(queryset=Compensation.processing.all(),
                              template_name="ner/all_compensation_list.html")),
         
         url(r'^compensation/all/$',
-            ListView.as_view(queryset=Compensation.objects.all().order_by('date_of_claim'),
+            ListView.as_view(queryset=Compensation.complete.all().order_by('date_of_claim'),
+                             template_name="ner/all_compensation_list.html")),
+        
+        url(r'^compensation/$',
+            ListView.as_view(queryset=Compensation.current.all().order_by('date_of_claim'),
                              template_name="ner/all_compensation_list.html")),
         
         url(r'^compensation/(?P<slug>[-\w]+)/$',

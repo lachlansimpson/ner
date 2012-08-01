@@ -145,8 +145,8 @@ ISCO_CODES = (
 )
 
 COMPENSATION_CHOICES = (
-    ('0','Paid'),
-    ('1','Rejected'),
+    ('0','Rejected'), 
+    ('1','Paid'),# Rejected and Paid are the first two for logic reasons in the Compensation Managers 
     ('2','Pending'),
     ('3','Processing'),
 )
@@ -394,6 +394,30 @@ class Witness(models.Model):
     def __unicode__(self):
         return str(self.person)
 
+#class CompensationDCompleteManager(models.Manager):
+#    def get_query_set(self):
+#        return super(CompensationCompleteManager, self).get_query_set().all().order_by('-date_of_claim')
+
+class CompensationCurrentManager(models.Manager):
+    def get_query_set(self):
+        return super(CompensationCurrentManager, self).get_query_set().filter(claim_status__gt=1).order_by('-date_of_claim')
+
+class CompensationRejManager(models.Manager):
+    def get_query_set(self):
+        return super(CompensationRejManager, self).get_query_set().filter(claim_status__exact=0).order_by('-date_of_claim')
+
+class CompensationPaidManager(models.Manager):
+    def get_query_set(self):
+        return super(CompensationPaidManager, self).get_query_set().filter(claim_status__exact=1).order_by('-date_of_claim')
+
+class CompensationPendManager(models.Manager):
+    def get_query_set(self):
+        return super(CompensationPendManager, self).get_query_set().filter(claim_status__exact=2).order_by('-date_of_claim')
+
+class CompensationProcManager(models.Manager):
+    def get_query_set(self):
+        return super(CompensationProcManager, self).get_query_set().filter(claim_status__exact=3).order_by('-date_of_claim')
+
 class Compensation(models.Model):
     class Meta:
         verbose_name = "Compensation Claim"
@@ -426,6 +450,15 @@ class Compensation(models.Model):
     payment_voucher_number = models.CharField(max_length=20,blank='TRUE',null='TRUE')
     slug = models.SlugField(max_length=20)
 
+    # Compensation Managers
+    complete = models.Manager()
+    current = CompensationCurrentManager()
+    paid = CompensationPaidManager()
+    rejected = CompensationRejManager()
+    processing = CompensationProcManager()
+    pending = CompensationPendManager()
+
+    #Compensation functions
     def get_reference_number(self):
         return self.pk + 10000
     
