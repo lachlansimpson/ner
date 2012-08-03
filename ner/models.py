@@ -156,6 +156,11 @@ EMPLOYMENT_STATUS = (
     ('1','Temporary'),
 )
 
+"""
+Requirement Class
+    Both the Person and the Vacancy objects have requirements, although the person class calls them skills 
+    These represent things like "English speaking" or "Masters Degree in X"
+"""
 class Requirement(models.Model):
     class Meta:
         verbose_name = "Job Requirement"
@@ -171,10 +176,21 @@ class Requirement(models.Model):
         else:
             return self.req_name
 
+"""
+Work Manager
+    This returns a subset of person objects that are between the ages of 16 and 50 as of today
+    These are people that are within the employable age group
+    The default manager returns *all* people, even those outside this range
+"""
 class WorkManager(models.Manager):
     def get_query_set(self):
         return super(WorkManager, self).get_query_set().filter(dob__gte = datetime.datetime(retire_year, month, day)).order_by('surname')
 
+"""
+Person Class
+    Person objects are used as the main reference for workers available
+    Are also used as Witnesses and Doctors within the Compensation object
+"""
 class Person(models.Model):
     class Meta: 
         verbose_name_plural = "People"
@@ -218,15 +234,20 @@ class Person(models.Model):
     workers = WorkManager()
     
     def __unicode__(self):
-        """Person reference: full name and ID # """
-        """ return self.first_name + ' ' + self.surname + ', ' + self.pk """
+        """Person reference: full name """
         return self.first_name + ' ' + self.surname
     
     def first_letter(self):
         return self.surname and self.surname[0] or ''
 
     def get_id(self):
-	return self.pk + 100000
+        """ 
+        This returns the worker's DB reference number, or "worker ID"
+        Think like a social security number
+        Not kept in the database as it would be extraneous
+	The 100000 is added for aesthetic reasons only
+        """
+        return self.pk + 100000
 
     def save(self):
         """ This adds the labour id - based on the primary key of the table to
@@ -242,6 +263,11 @@ class Person(models.Model):
     def get_absolute_url(self):
 	return ('person_view', [str(self.slug)])
 
+"""
+FTCQualifications class
+    This has a FK to a person
+    Is used to get data about a person's Fisheries Training Centre Qualifications
+"""
 class FTCQualification(models.Model):
     class Meta:
         verbose_name = "FTC Qualification"
@@ -251,6 +277,11 @@ class FTCQualification(models.Model):
     cadet_no = models.CharField('Cadet #',max_length=12, blank='True')
     year_grad = models.CharField('Year of graduation',max_length=5, blank='True')
 
+"""
+Certificate Class
+    Used as a generic "university or tafe degree" reference.
+    Has an FK to Person
+"""
 class Certificate(models.Model):
     person = models.ForeignKey('Person', related_name='certifications', blank='True', null='True')
     institute = models.CharField(max_length=50)
@@ -263,6 +294,10 @@ class Certificate(models.Model):
         """Certificate reference - program name and institution"""
         return self.program +', ' + self.institute
 
+"""
+Organisation class
+    The class used to define the organisations that have vacancies available
+"""
 class Organisation(models.Model):
     name = models.CharField(max_length=50)
     island = models.CharField(max_length=2,choices=ISLAND_CHOICES,blank='True')
@@ -297,6 +332,13 @@ class Organisation(models.Model):
     def first_letter(self):
         return self.name and self.name[0] or ''
 
+"""
+Vacancy Managers
+    The Open Vacancy manager returns a list of vacancies that are still "open"
+    Recently closed returns Vacancies that have closed within the last 30 days
+    The default is all vacancies ever
+"""
+
 class OpenVacancyManager(models.Manager):
     def get_query_set(self):
         return super(OpenVacancyManager, self).get_query_set().filter(closing_date__gte = today).order_by('closing_date')
@@ -304,6 +346,11 @@ class OpenVacancyManager(models.Manager):
 class RecentlyClosedVacancyManager(models.Manager):
     def get_query_set(self):
         return super(RecentlyClosedVacancyManager, self).get_query_set().filter(closing_date__range=(recent_closed_date, today)).order_by('-closing_date')
+
+"""
+Vacancy Class
+    The class dedicated to jobs available and the data taht goes with them.
+"""
 
 class Vacancy(models.Model):
     class Meta:
@@ -353,6 +400,10 @@ class Vacancy(models.Model):
             'day': self.closing_date.day,
             'slug': self.slug})
 
+"""
+Experience Class
+    The class of "work experience" objects that a person migh have
+"""
 class Experience(models.Model):
     class Meta:
         verbose_name = "Work Experience"
@@ -369,6 +420,11 @@ class Experience(models.Model):
     reference_contact_phone = models.CharField(max_length=10,
                                                blank='True', null='True')
 
+"""
+ShipExperience class
+    Slightly different from the regular work experience class - asks 
+    for information more pertinant to Ship Work
+"""
 class ShipExperience(models.Model):
     class Meta:
         verbose_name = "Ship Experience"
@@ -387,6 +443,10 @@ class ShipExperience(models.Model):
         dates = str(self.embark_date) + ' - ' + str(self.disembark_date) + ', '
         return dates + self.vessel_name
 
+"""
+Witness class
+    FK'd to Person class, this is for a list of witnesses to a compensation claim injury
+"""
 class Witness(models.Model):
     person = models.ForeignKey('Person')
     relationship_to_injured_party = models.CharField(max_length=30)
@@ -394,6 +454,12 @@ class Witness(models.Model):
     def __unicode__(self):
         return str(self.person)
 
+"""
+Compensation Managers
+    returns lists of managers based on status (Paid, rejected, processing, pending)
+    The Compensation Current manager returns the group of claims that are processing 
+    or pending only; in other words it excludes those marked paid or rejected
+"""
 class CompensationCurrentManager(models.Manager):
     def get_query_set(self):
         return super(CompensationCurrentManager, self).get_query_set().filter(claim_status__gt=1).order_by('-date_of_claim')
@@ -414,6 +480,10 @@ class CompensationProcManager(models.Manager):
     def get_query_set(self):
         return super(CompensationProcManager, self).get_query_set().filter(claim_status__exact=3).order_by('-date_of_claim')
 
+"""
+Compensation class
+    The information required for a compensation claim
+"""
 class Compensation(models.Model):
     class Meta:
         verbose_name = "Compensation Claim"
