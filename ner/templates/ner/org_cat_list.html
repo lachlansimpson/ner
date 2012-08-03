@@ -10,21 +10,21 @@ Organisation list
 {% endblock %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-    {{ block.super }}{% if organisation_list %}
-
-{% regroup organisation_list|dictsort:"category" by get_category_display as category_list %}
-    <ul>
-    {% for category in category_list %}
-        <li>{{ category.grouper }}
+    {{ block.super }}
+    {% if organisation_list %}
+        {% regroup organisation_list|dictsort:"category" by get_category_display as category_list %}
         <ul>
-            {% for org in category.list %} 
-                <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
+            {% for category in category_list %}
+                <li>{{ category.grouper }}
+                <ul>
+                    {% for org in category.list %} 
+                        <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                </li>
             {% endfor %}
         </ul>
-        </li>
-        {% endfor %}
-{% else %}
-    <p>No Organisations are available.</p>
+    {% else %}
+        <p>No Organisations are available.</p>
     {% endif %}
-
 {% endblock %}

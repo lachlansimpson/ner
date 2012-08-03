@@ -10,21 +10,21 @@ Organisation list
 {% endblock %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-    {{ block.super }}{% if organisation_list %}
-
-{% regroup organisation_list|dictsort:"industry" by get_industry_display as industry_list %}
-    <ul>
-    {% for industry in industry_list %}
-        <li>{{ industry.grouper }}
+    {{ block.super }}
+    {% if organisation_list %}
+        {% regroup organisation_list|dictsort:"industry" by get_industry_display as industry_list %}
         <ul>
-            {% for org in industry.list %} 
-                <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
-            {% endfor %}
-        </ul>
-        </li>
+        {% for industry in industry_list %}
+            <li>{{ industry.grouper }}
+                <ul>
+                {% for org in industry.list %} 
+                    <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
+                {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
-{% else %}
-    <p>No Organisations are available.</p>
+        </ul>
+    {% else %}
+        <p>No Organisations are available.</p>
     {% endif %}
-
 {% endblock %}

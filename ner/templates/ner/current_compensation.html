@@ -1,0 +1,31 @@
+{% extends "ner/base_site.html" %}
+{% comment %}
+
+Compensation list page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+List of compensation claims made 
+{% endblock %}
+{% block coltype %}colMS{% endblock %}
+{% block content %}
+    {{ block.super }}
+    <h3>All current claims (procssing or pending)</h3>
+    {% if compensation_list %}
+        {% regroup compensation_list|dictsort:"claim_status" by get_claim_status_display as ordered_claims %}
+            <ul>
+            {% for status in ordered_claims %}
+                <li>{{ status.grouper }}
+                <ul>
+                {% for claim in status.list %}
+                    <li><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></li>
+                {% endfor %}
+                </ul>
+                </li>
+            {% endfor %}
+            </ul>
+    {% else %}
+    <p>No claims have been made.</p>
+    {% endif %}
+{% endblock %}

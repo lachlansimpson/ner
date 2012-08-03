@@ -394,10 +394,6 @@ class Witness(models.Model):
     def __unicode__(self):
         return str(self.person)
 
-#class CompensationDCompleteManager(models.Manager):
-#    def get_query_set(self):
-#        return super(CompensationCompleteManager, self).get_query_set().all().order_by('-date_of_claim')
-
 class CompensationCurrentManager(models.Manager):
     def get_query_set(self):
         return super(CompensationCurrentManager, self).get_query_set().filter(claim_status__gt=1).order_by('-date_of_claim')

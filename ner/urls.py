@@ -7,13 +7,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('ner.views',
         url(r'^$', 'index'),
-
+        
+        url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
+        
         url(r'^people/all/$',
             ListView.as_view(queryset=Person.people.all().order_by('surname'),
                              template_name="ner/all_person_list.html")),
 
-        url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
-        
         url(r'^person/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Person), name='person_view'),
 
         url(r'^person/add/$',
@@ -96,7 +96,7 @@ urlpatterns = patterns('ner.views',
         
         url(r'^compensation/$',
             ListView.as_view(queryset=Compensation.current.all().order_by('date_of_claim'),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/current_compensation.html")),
         
         url(r'^compensation/(?P<slug>[-\w]+)/$',
             DetailView.as_view(

@@ -10,25 +10,23 @@ List of Organisations
 {% endblock %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-{{ block.super }}<h3>Organisations</h3>
-{% if organisation_list %}
-
-{% regroup organisation_list by first_letter as letter_list %} 
-{% for letter in letter_list %}
-    <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
-{% endfor %}
-    
-    {% for letter in letter_list %}
-    <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
-    <ul>
-        {% for org in letter.list %}
-            <li><a href="{{ org.get_absolute_url }}">{{ org }}</a></li>
+    {{ block.super }}
+    <h3>Organisations</h3>
+    {% if organisation_list %}
+        {% regroup organisation_list by first_letter as letter_list %} 
+        {% for letter in letter_list %}
+            <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
         {% endfor %}
-    </ul>
-    </li>
-    {% endfor %}
-{% else %}
-    <p>No organisations are available.</p>
+    
+        {% for letter in letter_list %}
+            <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
+            <ul>
+            {% for org in letter.list %}
+                <li><a href="{{ org.get_absolute_url }}">{{ org }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No organisations are available.</p>
     {% endif %}
-
 {% endblock %}

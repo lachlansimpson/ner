@@ -10,21 +10,21 @@ Organisation list
 {% endblock %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-    {{ block.super }}{% if organisation_list %}
-
-{% regroup organisation_list|dictsort:"island" by get_island_display as island_list %}
-    <ul>
-    {% for island in island_list %}
-        <li>{{ island.grouper }}
+    {{ block.super }}
+    {% if organisation_list %}
+        {% regroup organisation_list|dictsort:"island" by get_island_display as island_list %}
         <ul>
-            {% for org in island.list %} 
-                <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
+            {% for island in island_list %}
+                <li>{{ island.grouper }}
+                <ul>
+                {% for org in island.list %} 
+                    <li><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></li>
+                {% endfor %}
+                </ul>
+                </li>
             {% endfor %}
         </ul>
-        </li>
-        {% endfor %}
-{% else %}
-    <p>No Organisations are available.</p>
+    {% else %}
+        <p>No Organisations are available.</p>
     {% endif %}
-
 {% endblock %}
