@@ -13,14 +13,12 @@ List of pending compensation claims
 {{ block.super }}
 <h3>All pending claims</h3>
 {% if compensation_list %}
-
-<ul>
-    {% for claim in compensation_list %}
-    <li><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for claim in compensation_list %}
+            <li><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></li>
+        {% endfor %}
+    </ul>
 {% else %}
-<p>No claims are pending.</p>
+    <p>No claims are pending.</p>
 {% endif %}
-
 {% endblock %}

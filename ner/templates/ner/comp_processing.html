@@ -1,8 +1,6 @@
 {% extends "ner/base_site.html" %}
 {% comment %}
-
 Compensation list page of the portal.
-
 {% endcomment %}
 
 {% block title %}
@@ -13,14 +11,12 @@ List of in process compensation claims
 {{ block.super }}
 <h3>All in process claims</h3>
 {% if compensation_list %}
-
-<ul>
-    {% for claim in compensation_list %}
-    <li><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for claim in compensation_list %}
+            <li><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></li>
+        {% endfor %}
+    </ul>
 {% else %}
-<p>No claims are in process.</p>
+    <p>No claims are in process.</p>
 {% endif %}
-
 {% endblock %}
