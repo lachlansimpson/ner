@@ -17,116 +17,110 @@ Person detail
     <strong>Date of Birth:</strong> {{ person.dob }} <br />
     <strong>Gender:</strong> {{ person.get_gender_display }} <br />
     {% if person.religion %}
-    <strong>Religion:</strong> {{ person.religion }} <br />
+        <strong>Religion:</strong> {{ person.religion }} <br />
     {% endif %}
     {% if person.marital_status %}
-    <strong>Marital status:</strong> {{ person.get_marital_status_display }} <br />
+        <strong>Marital status:</strong> {{ person.get_marital_status_display }} <br />
     {% endif %}    
     {% if person.number_of_dependants %}
-    <strong>Number of dependants:</strong> {{ person.number_of_dependants }} <br />
+        <strong>Number of dependants:</strong> {{ person.number_of_dependants }} <br />
     {% endif %}
-    <strong>Address:</strong> {{ person.current_address }}
-
+        <strong>Address:</strong> {{ person.current_address }}
 
     {% if person.phone_mobile or person.email or person.phone_home or person.phone_other %}
-    <h3>Contact Details</h3>
-    {% if person.phone_mobile %}
-    <strong>Mobile:</strong> {{ person.phone_mobile }} <br />
-    {% endif %}
-    {% if person.email %}
-    <strong>Email:</strong> {{ person.email }} <br />
-    {% endif %}
-    {% if person.phone_home %}
-    <strong>Home Phone:</strong> {{ person.phone_home }} <br />
-    {% endif %}
-    {% if person.phone_other %}
-    <strong>Other Phone:</strong> {{ person.phone_other }} <br />
-    {% endif %}
+        <h3>Contact Details</h3>
+        {% if person.phone_mobile %}
+            <strong>Mobile:</strong> {{ person.phone_mobile }} <br />
+        {% endif %}
+        {% if person.email %}
+            <strong>Email:</strong> {{ person.email }} <br />
+        {% endif %}
+        {% if person.phone_home %}
+            <strong>Home Phone:</strong> {{ person.phone_home }} <br />
+        {% endif %}
+        {% if person.phone_other %}
+            <strong>Other Phone:</strong> {{ person.phone_other }} <br />
+        {% endif %}
     {% endif %}
 
     {% if person.home_island or person.birth_place or person.island_represented %}
-    <h3>Islands</h3>
-    {% if person.home_island %}
-    <strong>Home Island:</strong> {{ person.get_home_island_display }} <br />
-    {% endif %}
-    {% if person.birth_place %}
-    <strong>Birth Place:</strong> {{ person.get_birth_place_display }} <br />
-    {% endif %}
-    {% if person.island_represented %}
-    <strong>Island Represented:</strong> {{ person.get_island_represented_display }} <br />
-    {% endif %}
+        <h3>Islands</h3>
+        {% if person.home_island %}
+            <strong>Home Island:</strong> {{ person.get_home_island_display }} <br />
+        {% endif %}
+        {% if person.birth_place %}
+            <strong>Birth Place:</strong> {{ person.get_birth_place_display }} <br />
+        {% endif %}
+        {% if person.island_represented %}
+            <strong>Island Represented:</strong> {{ person.get_island_represented_display }} <br />
+        {% endif %}
     {% endif %}
 
     {% if person.passport_no or person.discharge_book or person.medical_test_data %}
-    <h3>Other Information</h3> 
-    {% if person.passport_no %}
-    <strong>Passport Number:</strong> {{ person.passport_no }} <br />
-    {% endif %}
-    {% if person.discharge_book %}
-    <strong>Discharge Book:</strong> {{ person.discharge_book }} <br />
-    {% endif %}
-    {% if person.medical_test_date %}
-    <strong>Last Medical Test on {{ person.medical_test_date }} <br />
+        <h3>Other Information</h3> 
+        {% if person.passport_no %}
+            <strong>passport number:</strong> {{ person.passport_no }} <br />
         {% endif %}
-        {% endif %} 
-        {% if person.certifications %}
+        {% if person.discharge_book %}
+            <strong>discharge book:</strong> {{ person.discharge_book }} <br />
+        {% endif %}
+        {% if person.medical_test_date %}
+            <strong>last medical test on {{ person.medical_test_date }} <br />
+        {% endif %}
+    {% endif %} 
+    {% if person.certifications %}
         <h3>Certifications</h3>
         {% for cert in person.certifications.all %}
-        <p><strong>Insititute:</strong> {{ cert.institute }}<br />
-        <strong>Program:</strong> {{ cert.program }}<br />
-        {% if cert.course_content %}
-        <strong>Content:</strong> {{ cert.course_content }}<br />{% endif %}
-        {% if cert.year_grad %}
-        <strong>Graduation:</strong> {{ cert.year_grad }}<br />{% endif %}
-        {% if cert.duration %}
-        <strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
+            <p><strong>Insititute:</strong> {{ cert.institute }}<br />
+            <strong>Program:</strong> {{ cert.program }}<br />
+            {% if cert.course_content %}
+                <strong>Content:</strong> {{ cert.course_content }}<br />{% endif %}
+            {% if cert.year_grad %}
+                <strong>Graduation:</strong> {{ cert.year_grad }}<br />{% endif %}
+            {% if cert.duration %}
+                <strong>Course Length:</strong> {{ cert.duration }}<br />{% endif %}</p>
         {% endfor %}
-        {% endif %}
-
+    {% endif %}
         </section>
     </div>
     <div id="content-right"> 
         {% if person.experiences %}
-        <h3>Work Experience</h3>
-        {% for xp in person.experiences.all %}
-        <p>
-        <strong>Title:</strong>{{ xp.title }}<br />
-        <strong>Organisation:</strong>{{ xp.organisation }}<br />
-        <strong>Start date:</strong>{{ xp.start_date }}
-        <strong>End date:</strong>{{ xp.end_date }}<br />
-        {% if xp.reference_name %}
-        <strong>Referee:</strong>{{  xp.reference_name }}<br />{% endif %}
-        {% if xp.reference_contact_phone %}
-        <strong>Referee Phone:</strong>{{  xp.reference_contact_phone }}{% endif %}
-        {% if xp.reference_contact_email %}
-        <strong>Referee Email:</strong>{{  xp.refernece_contact_email }}<br />{% endif %}
-        </p>
-        {% endfor %}
+            <h3>Work Experience</h3>
+            {% for xp in person.experiences.all %}
+            <p>
+            <strong>Title:</strong>{{ xp.title }}<br />
+            <strong>Organisation:</strong>{{ xp.organisation }}<br />
+            <strong>Start date:</strong>{{ xp.start_date }}
+            <strong>End date:</strong>{{ xp.end_date }}<br />
+                {% if xp.reference_name %}
+                    <strong>Referee:</strong>{{  xp.reference_name }}<br />{% endif %}
+                {% if xp.reference_contact_phone %}
+                    <strong>Referee Phone:</strong>{{  xp.reference_contact_phone }}{% endif %}
+                {% if xp.reference_contact_email %}
+                    <strong>Referee Email:</strong>{{  xp.refernece_contact_email }}<br />{% endif %}
+            </p>
+            {% endfor %}
         {% endif %}
         
         {% if person.jobs.all.count != 0 %}
-        <h3>Jobs Applied For</h3>
-        {% for job in person.jobs.all %}
-        <p>
-        <a href="{{ job.get_absolute_url }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}{% endif %}</em></a>
-        </p>
-        {% endfor %}
-      {% endif %} 
+            <h3>Jobs Applied For</h3>
+            {% for job in person.jobs.all %}
+                <p>
+                <a href="{{ job.get_absolute_url }}">{{ job.title }}, <em>{{ job.organisation }}{% if job.division %}, {{ job.division }}{% endif %}</em></a>
+            </p>
+            {% endfor %}
+        {% endif %} 
         
         {% if person.compensation_set.count != 0  %}
-       
-        <h3>Compensation claims</h3>
-        {% for claim in person.compensation_set.all %}
-        <p>
-        <a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
-        {% endfor %}
-      {% endif %} 
-        <section>
-	<h3>Comments</h3>
+            <h3>Compensation claims</h3>
+            {% for claim in person.compensation_set.all %}
+                <p><a href="{{ claim.get_absolute_url }}">{{ claim }}</a></p>
+            {% endfor %}
+        {% endif %} 
+        
+        <h3>Comments</h3>
         {% render_comment_list for person %}
-	
 	<h4>Add comment</h4>
         {% render_comment_form for person %}
-        </section>
     </div>
-    {% endblock %}
+{% endblock %}
