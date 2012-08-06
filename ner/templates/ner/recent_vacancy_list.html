@@ -10,16 +10,15 @@ Vacancy list
 {% endblock %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-{{ block.super }}
-<h3>Recently closed job vacancies</h3>
-{% if vacancy_list %}
-    <ul>
-    {% for job in vacancy_list %}
-        <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No Vacancies are available.</p>
+    {{ block.super }}
+    <h3>Recently closed job vacancies</h3>
+    {% if vacancy_list %}
+        <ul>
+        {% for job in vacancy_list %}
+            <li><a href="{{ job.get_absolute_url }}">{{ job }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Vacancies are available.</p>
     {% endif %}
-
 {% endblock %}
