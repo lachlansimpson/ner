@@ -3,7 +3,6 @@ Models
 These are the models that are available in the system:
 
 Person has the attributes (* indicates required):
-
 first name*, surname*, date of birth*, gender*, marital status, number of 
 dependants, religion, current address*, previous address, home island (choice of
 20 islands, Other, N/A and All), birth place (Island list), island represented 
@@ -47,3 +46,10 @@ organisation, reference name, reference contact email, reference contact phone
 There is a ShipExperience object with the attributes:
 person*, recruiting agency, embark date*, disembark date*, vessel name*, vessel 
 type*, vessel company*.
+
+There is a Compensation obect with the attributes:
+injured_person*, organisation*, job_performed*, employment_status, org_department, 
+location_of_accident*, date_of_accident*, date_of_claim*, date_accident_reported*, 
+claimant (if not injured person is automatically filled with injured_person),
+relationship_to_injured_party, witnesses, doctors_name, hospital, cause_of_injury*,
+doctors_remarks*, claim_status, amount_paid, payment_voucher_number, slug 
