@@ -12,23 +12,21 @@ List of people available
 {% block content %}
 {{ block.super }}<h3>Workers register</h3>
 {% if person_list %}
-
-{% regroup person_list by first_letter as letter_list %} 
-{% for letter in letter_list %}
-    <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
-{% endfor %}
-    
+    {% regroup person_list by first_letter as letter_list %} 
     {% for letter in letter_list %}
-    <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
-    <ul>
-        {% for person in letter.list %}
-            <li><a href="{{ person.get_absolute_url }}">{{ person }}</a></li>
-        {% endfor %}
-    </ul>
-    </li>
+        <a href="#{{ letter.grouper }}">{{ letter.grouper }}</a>
+    {% endfor %}
+        
+    {% for letter in letter_list %}
+        <h3 id="{{ letter.grouper }}">{{ letter.grouper }}</h3>
+        <ul>
+            {% for person in letter.list %}
+                <li><a href="{{ person.get_absolute_url }}">{{ person }}</a></li>
+            {% endfor %}
+        </ul>
+        </li>
     {% endfor %}
 {% else %}
     <p>No people are available.</p>
-    {% endif %}
-
+{% endif %}
 {% endblock %}
