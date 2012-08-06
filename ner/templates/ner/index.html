@@ -11,6 +11,6 @@
 {% endcomment %}
 {% block coltype %}colMS{% endblock %}
 {% block content %}
-{{ block.super }}
-{% include 'ner/vacancy_list_snippet.html' %}
+    {{ block.super }}
+    {% include 'ner/vacancy_list_snippet.html' %}
 {% endblock %}
