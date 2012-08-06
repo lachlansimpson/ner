@@ -25,6 +25,10 @@ v4
 ISIC Codes: each organisation has an Industry code, this is the top level of 
 ISIC 2008
 
+Compensation Choices: These relate to which stage a compensation claim is at. Paid and REjected are finalised, Processing indicates "waiting for more information from one or more parties" and Pending indicates "all information gathered, waiting for a decision to be made"
+
+Employment Status: Is used to indicate what type of employment a person was in at the time of an injury that is subject to claim.
+
 The values in each choice are here:
 
 ISLAND_CHOICES = (
@@ -136,5 +140,17 @@ ISCO_CODES = (
     ('7','Craft and related trades workers'),
     ('8','Plant and machine operators, and assemblers'),
     ('9','Elementary occupations'),
+)
+
+COMPENSATION_CHOICES = (
+    ('0','Rejected'), 
+    ('1','Paid'),# Rejected and Paid are the first two for logic reasons in the Compensation Managers 
+    ('2','Pending'),
+    ('3','Processing'),
+)
+
+EMPLOYMENT_STATUS = (
+    ('0','Permanent'),
+    ('1','Temporary'),
 )
 
