@@ -9,7 +9,7 @@ Compensation list page of the portal.
 {% block coltype %}colMS{% endblock %}
 {% block content %}
     {{ block.super }}
-    <h3>All current claims (procssing or pending)</h3>
+    <h3>All current claims (processing or pending)</h3>
     {% if compensation_list %}
         {% regroup compensation_list|dictsort:"claim_status" by get_claim_status_display as ordered_claims %}
             <ul>
