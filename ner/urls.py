@@ -12,7 +12,7 @@ urlpatterns = patterns('ner.views',
         
         url(r'^people/all/$',
             ListView.as_view(queryset=Person.people.all().order_by('surname'),
-                             template_name="ner/all_person_list.html")),
+                             template_name="ner/person_all.html")),
 
         url(r'^person/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Person), name='person_view'),
 
@@ -28,22 +28,22 @@ urlpatterns = patterns('ner.views',
         url(r'^orgs/$',
             ListView.as_view(
                 queryset=Organisation.objects.all().order_by('name'),
-                template_name="ner/org_list.html")),
+                template_name="ner/organisation_all.html")),
         
         url(r'^orgs/islands/$',
             ListView.as_view(
                 queryset=Organisation.objects.all(),
-                template_name="ner/org_island_list.html")),
+                template_name="ner/organisation_island_list.html")),
         
         url(r'^orgs/isic/$',
             ListView.as_view(
                 queryset=Organisation.objects.all(),
-                template_name="ner/org_isic_list.html")),
+                template_name="ner/organisation_isic_list.html")),
         
         url(r'^orgs/category/$',
             ListView.as_view(
                 queryset=Organisation.objects.all(),
-                template_name="ner/org_cat_list.html")),
+                template_name="ner/organisation_category_list.html")),
         
         url(r'^organisation/(?P<slug>[-\w]+)/$',
             DetailView.as_view(
@@ -54,12 +54,12 @@ urlpatterns = patterns('ner.views',
         url(r'^vacancies/requirements/$',
             ListView.as_view(
                 queryset=Requirement.objects.all().order_by("req_name"),
-                template_name="ner/vac_req_list.html")),
+                template_name="ner/vacancy_requirements_list.html")),
         
         url(r'^vacancies/recent/$',
             ListView.as_view(
                 queryset=Vacancy.recent.all(),
-                template_name="ner/recent_vacancy_list.html")),
+                template_name="ner/vacancy_recent_list.html")),
         
         url(r'^vacancies/$',
             ListView.as_view(
@@ -76,27 +76,27 @@ urlpatterns = patterns('ner.views',
         
         url(r'^compensation/paid/$',
             ListView.as_view(queryset=Compensation.paid.all(),
-                             template_name="ner/comp_paid.html")),
+                             template_name="ner/compensation_paid.html")),
         
         url(r'^compensation/rejected/$',
             ListView.as_view(queryset=Compensation.rejected.all(),
-                             template_name="ner/comp_rejected.html")),
+                             template_name="ner/compensation_rejected.html")),
         
         url(r'^compensation/pending/$',
             ListView.as_view(queryset=Compensation.pending.all(),
-                             template_name="ner/comp_pending.html")),
+                             template_name="ner/compensation_pending.html")),
         
         url(r'^compensation/processing/$',
             ListView.as_view(queryset=Compensation.processing.all(),
-                             template_name="ner/comp_processing.html")),
+                             template_name="ner/compensation_processing.html")),
         
         url(r'^compensation/all/$',
             ListView.as_view(queryset=Compensation.complete.all().order_by('date_of_claim'),
-                             template_name="ner/all_compensation_list.html")),
+                             template_name="ner/compensation_all.html")),
         
         url(r'^compensation/$',
             ListView.as_view(queryset=Compensation.current.all().order_by('date_of_claim'),
-                             template_name="ner/current_compensation.html")),
+                             template_name="ner/compensation_current.html")),
         
         url(r'^compensation/(?P<slug>[-\w]+)/$',
             DetailView.as_view(
