@@ -228,8 +228,13 @@ class Person(models.Model):
     medical_test_date = models.DateField('Date of last medical test',blank='True',null='True')
     
     skills = models.ManyToManyField(Requirement, blank='True', null='True')
-    slug = models.SlugField(editable=False)
 
+    # These attributes are for internal django usage
+    slug = models.SlugField(editable=False)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    # Managers to make views easier to read
     people = models.Manager()
     workers = WorkManager()
     
@@ -309,7 +314,11 @@ class Organisation(models.Model):
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
     acronym = models.CharField(max_length=10, blank='True', null='True')
+    
+    # These attributes are for internal django usage
     slug = models.SlugField(max_length=50)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         """ Organisational reference"""
@@ -378,6 +387,11 @@ class Vacancy(models.Model):
     slug = models.SlugField(max_length=50)
     applicants = models.ManyToManyField(Person, verbose_name='list of applicants', related_name='jobs', 
                                         blank='True', null='True')
+    
+    # These attributes are for internal django usage
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
     complete = models.Manager()
     open = OpenVacancyManager()
     recent = RecentlyClosedVacancyManager()
@@ -514,8 +528,12 @@ class Compensation(models.Model):
     claim_status = models.CharField(max_length=2,choices=COMPENSATION_CHOICES,blank='True')
     amount_paid = models.IntegerField(blank='TRUE',null='TRUE')
     payment_voucher_number = models.CharField(max_length=20,blank='TRUE',null='TRUE')
+    
+    # These attributes are for internal django usage
     slug = models.SlugField(max_length=20)
-
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
     # Compensation Managers
     complete = models.Manager()
     current = CompensationCurrentManager()
