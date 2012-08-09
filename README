@@ -23,7 +23,8 @@ To add a new object model:
  one that's already in there and making appropriate changes
  - map a new solr index:
     ./manage.py build_solr_schema > schema.xml
-    cp schema.xml /opt/solr/solr/conf/
+    cp schema.xml /opt/solr/solr/conf/ (dev laptop)
+    cp schema.xml /home/solr/solr/solr/conf/ (prod server)
 
  - restart solr. In /etc/init/solr.conf it has a command to respawn the process 
  on unexpected termination, so something as simple as finding the process and 
