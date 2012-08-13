@@ -7,6 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('ner.views',
         url(r'^$', 'index'),
+        url(r'^search/$', 'search'),
         
         url(r'^people/$', ListView.as_view(queryset=Person.workers.all())),
         

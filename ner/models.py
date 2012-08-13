@@ -43,7 +43,7 @@ ISLAND_CHOICES = (
     ('08',u'Kuria'),
     ('09',u'Aranuka'),
     ('10',u'Abemana'),
-    ('11',u'Nonuti'),
+    ('11',u'Nonouti'),
     ('12',u'Tabiteua'),
     ('13',u'Onotoa'),
     ('14',u'Beru'),
