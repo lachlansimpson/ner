@@ -253,6 +253,7 @@ class Person(models.Model):
 	The 100000 is added for aesthetic reasons only
         """
         return self.pk + 100000
+    get_id.short_description = 'ID Number'
 
     def save(self):
         """ This adds the labour id - based on the primary key of the table to
@@ -545,7 +546,8 @@ class Compensation(models.Model):
     #Compensation functions
     def get_reference_number(self):
         return self.pk + 10000
-    
+    get_reference_number.short_description = 'Claim Reference Number'    
+
     @models.permalink	
     def get_absolute_url(self):
 	return ('compensation_claim_view', [str(self.slug)])
