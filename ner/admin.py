@@ -97,7 +97,7 @@ class PersonAdmin(admin.ModelAdmin):
     ]
     inlines = [CertInline, ExperienceInline, ShipXPInline, FTCQualInline, ApplicantsInline]
     list_filter = ('gender',)
-    list_display = ('__unicode__','birth_place',)
+    list_display = ('__unicode__','birth_place','get_id')
     search_fields = ('first_name',)
     form = PersonAdminForm
 
@@ -171,6 +171,7 @@ class CompensationAdmin(admin.ModelAdmin):
         ('Other Details',
          {'fields':['claim_status',('payment_voucher_number','amount_paid') ]}),
     ]
+    list_display = ('__unicode__','get_reference_number')
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Witness, WitnessAdmin)
