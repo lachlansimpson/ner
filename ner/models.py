@@ -259,9 +259,7 @@ class Person(models.Model):
         ensure uniqueness and incrementability. The field is otherwise
         uneditable for data integrity
         """
-        if not self.id:
-            super(Person, self).save() # Call the "real" save() method.
-            self.slug = slugify(self.get_id())
+        self.slug = slugify(self.get_id())
         super(Person, self).save() # Call the "real" save() method.
     
     @models.permalink	
@@ -291,9 +289,9 @@ class Certificate(models.Model):
     person = models.ForeignKey('Person', related_name='certifications', blank='True', null='True')
     institute = models.CharField(max_length=50)
     program = models.CharField(max_length=100)
-    course_content = models.CharField(max_length=200, blank='True', null='True')
+    course_content = models.CharField(max_length=200, blank='True')
     year_grad = models.CharField('Year of graduation',max_length=5,blank='True')
-    duration = models.CharField(max_length=10,blank='True',null='True')
+    duration = models.CharField(max_length=10,blank='True')
 
     def __unicode__(self):
         """Certificate reference - program name and institution"""
@@ -313,7 +311,7 @@ class Organisation(models.Model):
     contact_email = models.EmailField('Email', blank='True')
     industry = models.CharField(max_length=4,choices=ISIC_CODES,blank='True')
     category = models.CharField(max_length=1,choices=ORG_CAT_CHOICES)
-    acronym = models.CharField(max_length=10, blank='True', null='True')
+    acronym = models.CharField(max_length=10, blank='True')
     
     # These attributes are for internal django usage
     slug = models.SlugField(max_length=50)
@@ -428,11 +426,9 @@ class Experience(models.Model):
     organisation = models.ForeignKey('Organisation')
     start_date = models.DateField()
     end_date = models.DateField()
-    reference_name = models.CharField(max_length=30, blank='True', null='True')
-    reference_contact_email = models.CharField(max_length=40, blank='True',
-                                               null='True')
-    reference_contact_phone = models.CharField(max_length=10,
-                                               blank='True', null='True')
+    reference_name = models.CharField(max_length=30, blank='True')
+    reference_contact_email = models.CharField(max_length=40, blank='True')
+    reference_contact_phone = models.CharField(max_length=10, blank='True')
 
 """
 ShipExperience class
@@ -506,8 +502,8 @@ class Compensation(models.Model):
     injured_person = models.ForeignKey('Person',related_name='injured_party')
     organisation = models.ForeignKey('Organisation',related_name='injured_partys_employer')
     job_performed = models.CharField('Job Title',max_length=30)
-    employment_status = models.CharField(max_length=2,choices=EMPLOYMENT_STATUS,blank='TRUE',null='TRUE')
-    org_department = models.CharField(max_length=40,blank='TRUE',null='TRUE')
+    employment_status = models.CharField(max_length=2,choices=EMPLOYMENT_STATUS,blank='TRUE')
+    org_department = models.CharField(max_length=40,blank='TRUE')
 
     location_of_accident = models.CharField(max_length=100)
     date_of_accident = models.DateField()
@@ -515,7 +511,7 @@ class Compensation(models.Model):
     date_of_claim = models.DateField() # make this uneditable, set at save
     
     claimant = models.ForeignKey('Person',blank='TRUE',null='TRUE') #if blank, claimant is affected party
-    relationship_to_injured_party = models.CharField(max_length=30,blank='TRUE',null='TRUE')
+    relationship_to_injured_party = models.CharField(max_length=30,blank='TRUE')
 
     witnesses = models.ManyToManyField('Witness', verbose_name='list of witnesses', related_name='witnesses',
                                           blank='True', null='True')
@@ -527,7 +523,7 @@ class Compensation(models.Model):
     
     claim_status = models.CharField(max_length=2,choices=COMPENSATION_CHOICES,blank='True')
     amount_paid = models.IntegerField(blank='TRUE',null='TRUE')
-    payment_voucher_number = models.CharField(max_length=20,blank='TRUE',null='TRUE')
+    payment_voucher_number = models.CharField(max_length=20,blank='TRUE')
     
     # These attributes are for internal django usage
     slug = models.SlugField(max_length=20)
