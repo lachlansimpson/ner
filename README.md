@@ -1,34 +1,21 @@
-= National Employment Register database for the 
-== Ministry of Labour and Human Resource Development, Government of Kiribati
+National Employment Register 
+============================
 
-Software developed and written by Lachlan 'Musicman' Simpson (c)2012
+A database application written for the Ministry of Labour and Human Resource Development, Government of Kiribati
 
-Released under the GPL 3
+This app was written using Django 1.4 
 
-Written using Django 1.4
+It has a simple structure:
 
-South is installed:
+Jobs, Organisations, Workers, Qualifications, Work Experience and Worker's Compensation claims.
 
-Once a change has been made to app/models.py do this from within a virtualised
-environment (otherwise django throws an error, as it uses the wrong django):
-$ python manage.py schemamigration app --auto
-then
-$ python manage.py migrate app
 
-Haystack is installed:
-To add a new object model:
- - make appropriate changes to app/search_indexes.py
- - create mlhrd/ner/templates/search/indexes/ner/{model-name}_text.txt by coping 
- one that's already in there and making appropriate changes
- - map a new solr index:
-    ./manage.py build_solr_schema > schema.xml
-    cp schema.xml /opt/solr/solr/conf/ (dev laptop)
-    cp schema.xml /home/solr/solr/solr/conf/ (prod server)
+License
+-------
+This project is open sourced under [GNU GPL Version 3](http://www.gnu.org/licenses/gpl-3.0.html).
 
- - restart solr. In /etc/init/solr.conf it has a command to respawn the process 
- on unexpected termination, so something as simple as finding the process and 
- executing a kill -9 on it should be sufficient
- 
- - Then build the new solr index:
-    ./manage.py rebuild_index
+See LICENSE file for a full copy of the license
 
+Author
+------
+Lachlan Musicman Simpson 2012 - [Twitter](http://twitter.com/#datakid23) [E-mail](mailto://lachlan@constraintworks.com)
