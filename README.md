@@ -18,4 +18,4 @@ See LICENSE file for a full copy of the license
 
 Author
 ------
-Lachlan Musicman Simpson 2012 - [Twitter](http://twitter.com/#datakid23) [E-mail](mailto://lachlan@constraintworks.com)
+Lachlan Musicman Simpson (c) 2012 - [Twitter](http://twitter.com/#datakid23) [E-mail](mailto://lachlan@constraintworks.com)
