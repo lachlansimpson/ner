@@ -1,4 +1,4 @@
-from ner.models import Vacancy, Person, Certificate, Compensation, Organisation
+from ner.models import Vacancy
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 

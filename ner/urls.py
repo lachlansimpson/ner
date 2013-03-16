@@ -1,8 +1,7 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 from ner.models import Person, Organisation, Vacancy, Requirement, Compensation
-from ner.admin import PersonAdmin, CertInline, ExperienceInline, ShipXPInline, FTCQualInline
-import datetime
+from ner.admin import PersonAdmin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = patterns('ner.views',

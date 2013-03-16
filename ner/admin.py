@@ -2,10 +2,9 @@
 makes the objects available via the admin interface
 """
 from ner.models import * 
-from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.contrib import admin
 from django.forms import ModelForm, ValidationError
-from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+from django.forms.widgets import RadioSelect
 from django.forms.extras.widgets import SelectDateWidget 
 from ner.action import export_as_csv
 import datetime
