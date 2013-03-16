@@ -1,6 +1,5 @@
-National Employment Register database for the 
-Ministry of Labour and Human Resource Development
-Bairiki, Kiribati
+= National Employment Register database for the 
+== Ministry of Labour and Human Resource Development, Government of Kiribati
 
 Software developed and written by Lachlan 'Musicman' Simpson (c)2012
 
